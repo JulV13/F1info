@@ -4,6 +4,7 @@ body{
 }
 
 .menu{
+    margin-top: 5px;
     color: white;
     text-align: center;
     margin: 0 auto;
@@ -19,9 +20,23 @@ body{
     width: 20%;
 }
 
+.menu div:hover{
+    background-color:rgb(43, 21, 21);
+    transition: 0.2s;
+} 
+
 .menu img{
     width: 57px;
     height: 57px;
+}
+
+.read-progress-bar{
+    position: fixed;
+    width: 10%;
+    height: 5px;
+    background-color: white;
+    top: 0;
+    left: 0;
 }
 
 a{
@@ -42,7 +57,9 @@ h2{
 }
 
 .info-boxes{
-    
+    background-color: rgb(51, 25, 25);
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .info-boxes div{
@@ -61,9 +78,14 @@ h2{
 }
 
 footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
     text-align: center;
     margin: 0 auto;
     color: white;
     background-color: red;
     font-weight: bold;
+    margin-top: 20px;
 }
