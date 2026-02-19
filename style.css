@@ -1,0 +1,50 @@
+body{
+    background-color: rgb(37, 37, 37);
+    font-family: "Outfit", sans-serif;
+}
+
+.menu{
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 40px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-weight: bold;
+}
+
+.menu div{
+    width: 20%;
+}
+
+.menu img{
+    width: 57px;
+    height: 57px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+h1{
+    color: rgb(78, 78, 78);
+    font-weight: bold;
+    text-align: center;
+}
+
+h2{
+    color: rgb(113, 113, 113);
+    font-weight: bold;
+    text-align: center; 
+}
+
+footer{
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    background-color: red;
+    font-weight: bold;
+}
