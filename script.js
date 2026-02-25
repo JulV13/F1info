@@ -9,24 +9,21 @@ document.addEventListener("scroll", () => {
 
 });
 
-//<div class="teamColorBox" style="backgroundColor: #${driver.team_colour}"></div>
-
 const getDriversChampionshipInfo = async () => {
     try {
-        const response = await fetch("https://api.openf1.org/v1/drivers?session_key=latest");
-        const data = await response.json();
-        console.log(data);
+        const driverChampionshipResponse = await fetch("https://api.openf1.org/v1/drivers?session_key=latest");
+        const driverChampionshipData = await driverChampionshipResponse.json();
+        console.log(driverChampionshipData);
         var driverChampionshipBox = document.getElementById("driverChampionshipBox");
         driverChampionshipBox.innerHTML = '';
         driverChampionshipBox.style.visibility="visible";
-        data.forEach(driver => {
+        driverChampionshipData.forEach(driver => {
             driverChampionshipBox.innerHTML +=`
-                <div class="driverCard">
+                <div class="driverCard" style="background-color: #${driver.team_colour}">
                     <img src="${driver.headshot_url}" class="driverImage" style="border: 4px solid #${driver.team_colour}">
-                    ${driver.first_name} 
-                    ${driver.last_name}
-                    ${driver.driver_number}
-                    ${driver.team_name}
+                    <span>${driver.first_name} ${driver.last_name}</span>
+                    <span class="driverNumber">${driver.driver_number}</span>
+                    <span>${driver.team_name}</span>
                 </div>
             `;    
         });
@@ -38,9 +35,21 @@ const getDriversChampionshipInfo = async () => {
 
 const getConstructorsChampionshipInfo = async () => {
     try {
-        const resp = await fetch("https://api.openf1.org/v1/drivers?driver_number=1&session_key=9158");
-        const data = await resp.json();
-        console.log(data);
+        const constructorChampionshipResponse = await fetch("https://api.openf1.org/v1/championship_teams?session_key=9839");
+        const constructorChampionshipData = await constructorChampionshipResponse.json();
+        console.log(constructorChampionshipData);
+        var constructorsChampionshipBox = document.getElementById("constructorsChampionshipBox");
+        constructorsChampionshipBox.innerHTML = '';
+        constructorsChampionshipBox.style.visibility="visible";
+        constructorChampionshipData.forEach(team => {
+            constructorsChampionshipBox.innerHTML +=`
+                <div class="teamCard">
+                    <span>${team.team_name}</span>
+                    <span class="teamPosition">${team.position_current}</span>
+                    <span>points: ${team.points_current}</span>
+                </div>
+            `;    
+        });
     } catch (error) {
         console.log("error: ", error);
     }
