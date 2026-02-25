@@ -15,16 +15,13 @@ body{
     align-content: center;
     font-weight: bold;
 }
-
 .menu div{
     width: 20%;
 }
-
 .menu div:hover{
     background-color:rgb(43, 21, 21);
     transition: 0.2s;
 } 
-
 .menu img{
     width: 57px;
     height: 57px;
@@ -61,22 +58,17 @@ h2{
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
 .info-boxes div{
     width: 75%;
-    height: 200px;
+    min-height: 200px;
     margin: 0 auto;
     text-align: center;
     background-color:rgb(79, 29, 29);
     margin-bottom: 10px;
     color: white;
     font-size: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border: 4px solid black;
 }
-
 .info-boxes button{
     width: 200px;
     height: 100px;
@@ -89,9 +81,9 @@ h2{
     align-items: center;
     margin: 0 auto;
     margin-bottom: 20px;
+    margin-top: 20px;
     font-size: 35px;
 }
-
 .info-boxes button:hover{
     transition: 0.2s;
     background-color: rgb(255, 84, 84);
@@ -109,4 +101,45 @@ footer{
     background-color: rgb(79, 29, 29);
     font-weight: bold;
     margin-top: 20px;
+}
+
+.driverChampionshipBox{
+    width: 75%;
+    min-height: 400px;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+    background-color:rgb(79, 29, 29);
+    margin-bottom: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 50px;
+    border: 4px solid black;
+}
+
+.driverCard{
+    width: 50%;
+    height: 100px;
+    text-align: center;
+    background-color:rgb(130, 48, 48);
+    margin-bottom: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+    border: 2px solid black;
+}
+
+.teamColorBox{
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+}
+
+.driverImage{
+    width: 100px;
+    height: 100px;
+    border: 4px solid black;
+    border-radius: 10px;  
 }
