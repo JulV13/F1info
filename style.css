@@ -178,8 +178,7 @@ h2{
 }
 
 .headToHeadBox{
-    display: flex;
-    flex-direction: row;
+    
 }
 
 .headToHeadCard{
@@ -194,8 +193,6 @@ h2{
     font-size: 35px;
     border: 4px solid rgb(35, 35, 35);
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
 }
 
 footer{
