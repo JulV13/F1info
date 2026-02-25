@@ -177,6 +177,27 @@ h2{
     font-style: italic;  
 }
 
+.headToHeadBox{
+    display: flex;
+    flex-direction: row;
+}
+
+.headToHeadCard{
+    width: 20%;
+    min-height: 100px;
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+    background-color:rgb(41, 41, 41);
+    margin-bottom: 10px;
+    color: white;
+    font-size: 35px;
+    border: 4px solid rgb(35, 35, 35);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
 footer{
     display: flex;
     align-items: center;
