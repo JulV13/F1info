@@ -42,6 +42,9 @@ const raceResults = async (session_key) => {
         console.log(sessionResultsData);
         const driversResponse = await fetch(`https://api.openf1.org/v1/drivers?session_key=${session_key}`);
         const driversData = await driversResponse.json();
+        const driversChampionshipResponse = await fetch(`https://api.openf1.org/v1/championship_drivers?session_key=${session_key}`);
+        const driversChampionshipData = await driversChampionshipResponse.json();
+
         const chosenRaceInfoBox = document.getElementById("chosenRaceInfoBox");
         chosenRaceInfoBox.style.visibility = "visible";
         let chosenRaceResultsTable = `
@@ -49,6 +52,10 @@ const raceResults = async (session_key) => {
             <thead>
             <tr>
                 <td>POS.</td>
+                <td>POINTS START</td>
+                <td>POINTS CURRENT</td>
+                <td>WDC # START</td>
+                <td>WDC # CURRENT</td>
                 <td>#</td>
                 <td>DRIVER</td>
                 <td>LAPS</td>
@@ -61,10 +68,15 @@ const raceResults = async (session_key) => {
         `;
         sessionResultsData.forEach(driver => { 
             let driverInfo = driversData.find(d => d.driver_number == driver.driver_number);
+            let championshipInfo = driversChampionshipData.find(c => c.driver_number == driver.driver_number);
             let fullName = driverInfo.full_name ?? "-";
             chosenRaceResultsTable+=`
                 <tr>
                     <td>${driver.position ?? "-"}</td>
+                    <td>${championshipInfo.points_start}</td>
+                    <td>${championshipInfo.points_current}</td>
+                    <td>${championshipInfo.position_start}</td>
+                    <td>${championshipInfo.position_current}</td>
                     <td>${driver.driver_number}</td>
                     <td>${fullName}</td>
                     <td>${driver.number_of_laps}</td>
