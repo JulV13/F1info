@@ -92,7 +92,7 @@ const getLatestMeetingInfo = async () => {
         console.log(meetingData); 
 
         var latestMeetingBox = document.getElementById("latestMeetingBox");
-        weatherData.innerHTML = '';
+        latestMeetingBox.innerHTML = '';
 
         let weatherDirection = '';
         if (weatherData[558].wind_direction >=0 && weatherData[558].wind_direction <=89) weatherDirection='North-East';
@@ -101,11 +101,11 @@ const getLatestMeetingInfo = async () => {
         if (weatherData[558].wind_direction >=270 && weatherData[558].wind_direction <=359) weatherDirection='North-West';
 
         latestMeetingBox.innerHTML += `
+            <span>${meetingData[0].meeting_official_name}</span>
             <img src="${meetingData[0].circuit_image}">
             <span>${meetingData[0].circuit_short_name}</span>
             <img src="${meetingData[0].country_flag}">
             <span>${meetingData[0].country_name}</span>
-            <span>session type: ${meetingData[0].meeting_official_name}</span>
             <span class="weatherData">🌡️ air: ${weatherData[558].air_temperature}&deg</span>
             <span class="weatherData">🌡️ track: ${weatherData[558].track_temperature}&deg</span>
             <span class="weatherData">💧 humidity: ${weatherData[558].humidity}</span>
@@ -113,6 +113,7 @@ const getLatestMeetingInfo = async () => {
             <span class="weatherData">🌧️ rainfall: ${weatherData[558].rainfall}</span>
             <span class="weatherData">🧭 wind direction: ${weatherDirection} (${weatherData[558].wind_direction})</span>
             <span class="weatherData">💨 wind speed: ${weatherData[558].wind_speed}</span>
+            <button onclick="getLatestResults()">ℹ️</button>
         `
     } catch (error) {
         console.log("error: ", error);
@@ -141,4 +142,52 @@ const headToHead = async () => {
     } catch (error) {
        console.log("error: ", error); 
     }
+}
+
+const getLatestResults = async () => {
+      try {
+        const latestResultsResponse = await fetch("https://api.openf1.org/v1/session_result?session_key=latest");
+        const latestResultsData = await latestResultsResponse.json();
+        console.log(latestResultsData);
+        const driversResponse = await fetch("https://api.openf1.org/v1/drivers?session_key=latest");
+        const driversData = await driversResponse.json();
+        var latestMeetingBox = document.getElementById("latestMeetingBox");
+        let latestResultsTable = `
+        <table>
+            <thead>
+            <tr>
+                <td>POS.</td>
+                <td>NUMBER</td>
+                <td>DRIVER</td>
+                <td>LAPS</td>
+                <td>DNF</td>
+                <td>DSQ</td>
+                <td>DNS</td>
+            </tr>
+            </thead>
+            <tbody>
+        `;
+        latestResultsData.forEach(driver => { 
+            let driverInfo = driversData.find(d => d.driver_number == driver.driver_number);
+            let fullName = driverInfo.full_name ?? "-";
+            latestResultsTable+=`
+                <tr>
+                    <td>${driver.position ?? "-"}</td>
+                    <td>${driver.driver_number}</td>
+                    <td>${fullName}</td>
+                    <td>${driver.number_of_laps}</td>
+                    <td>${driver.dnf === false ? "no" : "yes"}</td>
+                    <td>${driver.dsq === false ? "no" : "yes"}</td>
+                    <td>${driver.dns === false ? "no" : "yes"}</td>
+                </tr>
+            `;
+        });
+        latestResultsTable+=`
+            </tbody>
+        </table>
+        `;
+        latestMeetingBox.innerHTML += latestResultsTable;
+    } catch (error) {
+        console.log("error: ", error);
+    }  
 }

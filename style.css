@@ -208,12 +208,28 @@ h2{
 #latestMeetingBox{
     display: flex;
     flex-direction: column;
+    padding-bottom: 20px;
 }
 
 #latestMeetingBox img{
     width: 125px;
     height: 100px;
     margin: 0 auto;
+}
+
+#latestMeetingBox table{
+    width: 75%;
+    height: auto;
+    border: 2px solid black;
+    border-collapse: collapse;
+    background-color: white;
+    color: black;
+    margin: 0 auto;
+}
+
+#latestMeetingBox tr, td{
+    font-size: 25px;
+    border: 2px solid black; 
 }
 
 footer{
