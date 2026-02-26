@@ -9,50 +9,6 @@ document.addEventListener("scroll", () => {
 
 });
 
-window.onload = headToHeadSelectLoad = async () => {
-    try {
-        const driversResponse = await fetch("https://api.openf1.org/v1/championship_drivers?session_key=9839");
-        const driversData = await driversResponse.json();
-        console.log(driversData);
-        var headToHeadSelect1 = document.getElementById("headToHeadSelect1");
-        var headToHeadSelect2 = document.getElementById("headToHeadSelect2");
-        driversData.forEach(driver => {
-            headToHeadSelect1.innerHTML += `
-            <option>${driver.driver_number}</option>
-            `;
-            headToHeadSelect2.innerHTML += `
-            <option>${driver.driver_number}</option>
-            `;
-        });
-    } catch (error) {
-        console.log("error: ", error);
-    }
-}
-
-const headToHead = async () => {
-    try {
-        let driver1 = document.getElementById("headToHeadSelect1").value;
-        let driver2 = document.getElementById("headToHeadSelect2").value;
-        const headToHeadResponse = await fetch(`https://api.openf1.org/v1/championship_drivers?session_key=9839&driver_number=${driver1}&driver_number=${driver2}`);
-        const headToHeadData = await headToHeadResponse.json();
-        console.log(headToHeadData);
-        var headToHeadBox = document.getElementById("headToHeadBox");
-        headToHeadBox.innerHTML = '';
-        headToHeadBox.style.visibility="visible";
-        headToHeadData.forEach(driver => {
-            headToHeadBox.innerHTML += `
-                <div class="headToHeadCard">
-                    <span class="driverNumber">number: ${driver.driver_number}</span>
-                    <span>position: ${driver.position_current}</span>
-                    <span>points: ${driver.points_current}</span>
-                </div>
-            `
-        });
-    } catch (error) {
-       console.log("error: ", error); 
-    }
-}
-
 const getLatestMeetingInfo = async () => {
     try {
         const weatherResponse = await fetch("https://api.openf1.org/v1/weather?session_key=latest");
@@ -122,9 +78,9 @@ const getLatestResults = async () => {
                     <td>${driver.driver_number}</td>
                     <td>${fullName}</td>
                     <td>${driver.number_of_laps}</td>
-                    <td>${driver.dnf === false ? "no" : "yes"}</td>
-                    <td>${driver.dsq === false ? "no" : "yes"}</td>
-                    <td>${driver.dns === false ? "no" : "yes"}</td>
+                    <td>${driver.dnf === false ? "❌" : "✅"}</td>
+                    <td>${driver.dsq === false ? "❌" : "✅"}</td>
+                    <td>${driver.dns === false ? "❌" : "✅"}</td>
                 </tr>
             `;
         });

@@ -1,3 +1,14 @@
+document.addEventListener("scroll", () => {
+
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    
+    const pageReadenPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+    document.getElementById("read-progress-bar").style.width = pageReadenPercent + "%";
+
+});
+
 const getRacesInfo = async () => {
     try {
         const d = new Date();
@@ -57,9 +68,9 @@ const raceResults = async (session_key) => {
                     <td>${driver.driver_number}</td>
                     <td>${fullName}</td>
                     <td>${driver.number_of_laps}</td>
-                    <td>${driver.dnf === false ? "no" : "yes"}</td>
-                    <td>${driver.dsq === false ? "no" : "yes"}</td>
-                    <td>${driver.dns === false ? "no" : "yes"}</td>
+                    <td>${driver.dnf === false ? "❌" : "✅"}</td>
+                    <td>${driver.dsq === false ? "❌" : "✅"}</td>
+                    <td>${driver.dns === false ? "❌" : "✅"}</td>
                 </tr>
             `;
         });

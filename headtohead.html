@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <script src="races.js"></script>
+    <script src="headtohead.js"></script>
 </head>
 <body>
     <div class="read-progress-bar" id="read-progress-bar"></div>
@@ -17,36 +17,35 @@
         <img src="/images/f1car.png">
         <div>
             <a href="index.html">Latest</a>
-        </div> 
+        </div>        
         <div>
             <a href="drivers.html">Drivers</a>
+        </div>
+        <div>
+            <a href="headtohead.html">HeadToHead</a>
         </div>
         <div>
             <a href="teams.html">Teams</a>
         </div>
         <div>
-            <a href="races.html">Races</a>
-        </div>
+            <a href="sessions.html">Sessions</a>
+        </div>       
     </nav>
 
     <h1>F1info</h1>
     <h2>Your source of Formula 1</h2>
 
     <div class="info-boxes">
-        <div id="racesBox" class="info-box">
-            Choose a season:
-            <form id="seasonsForm">
-                <select id="seasonSelect">
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                </select>
+
+        <div class="info-box">
+            Head to Head:
+            <form id="headToHeadForm">
+                <select id="headToHeadSelect1"></select>
+                <select id="headToHeadSelect2"></select>
             </form>
-            <button onclick="getRacesInfo()">🏁</button>
+            <button onclick="headToHead()">🆚</button>
         </div>
-        <div id="allRacesBox" style="visibility: hidden"></div>
-        <div id="chosenRaceInfoBox" style="visibility: hidden"></div>
+        <div id="headToHeadBox" style="visibility: hidden"></div>
     </div>    
 
     <footer>
