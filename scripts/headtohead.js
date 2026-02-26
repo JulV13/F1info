@@ -37,6 +37,10 @@ window.onload = headToHeadSelectLoad = async () => {
         headToHeadSelect2.innerHTML += select2data;
     } catch (error) {
         console.log("error: ", error);
+        var headToHeadBox = document.getElementById("headToHeadBox");
+        headToHeadBox.innerHTML = '';
+        headToHeadBox.style.visibility="visible";
+        headToHeadBox.innerHTML = 'error occured: ' + error;
     }
 }
 
