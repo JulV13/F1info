@@ -29,6 +29,30 @@ window.onload = headToHeadSelectLoad = async () => {
     }
 }
 
+const headToHead = async () => {
+    try {
+        let driver1 = document.getElementById("headToHeadSelect1").value;
+        let driver2 = document.getElementById("headToHeadSelect2").value;
+        const headToHeadResponse = await fetch(`https://api.openf1.org/v1/championship_drivers?session_key=9839&driver_number=${driver1}&driver_number=${driver2}`);
+        const headToHeadData = await headToHeadResponse.json();
+        console.log(headToHeadData);
+        var headToHeadBox = document.getElementById("headToHeadBox");
+        headToHeadBox.innerHTML = '';
+        headToHeadBox.style.visibility="visible";
+        headToHeadData.forEach(driver => {
+            headToHeadBox.innerHTML += `
+                <div class="headToHeadCard">
+                    <span class="driverNumber">number: ${driver.driver_number}</span>
+                    <span>position: ${driver.position_current}</span>
+                    <span>points: ${driver.points_current}</span>
+                </div>
+            `
+        });
+    } catch (error) {
+       console.log("error: ", error); 
+    }
+}
+
 const getLatestMeetingInfo = async () => {
     try {
         const weatherResponse = await fetch("https://api.openf1.org/v1/weather?session_key=latest");
@@ -63,30 +87,6 @@ const getLatestMeetingInfo = async () => {
         document.getElementById("latestInfoButton").disabled = true;
     } catch (error) {
         console.log("error: ", error);
-    }
-}
-
-const headToHead = async () => {
-    try {
-        let driver1 = document.getElementById("headToHeadSelect1").value;
-        let driver2 = document.getElementById("headToHeadSelect2").value;
-        const headToHeadResponse = await fetch(`https://api.openf1.org/v1/championship_drivers?session_key=9839&driver_number=${driver1}&driver_number=${driver2}`);
-        const headToHeadData = await headToHeadResponse.json();
-        console.log(headToHeadData);
-        var headToHeadBox = document.getElementById("headToHeadBox");
-        headToHeadBox.innerHTML = '';
-        headToHeadBox.style.visibility="visible";
-        headToHeadData.forEach(driver => {
-            headToHeadBox.innerHTML += `
-                <div class="headToHeadCard">
-                    <span class="driverNumber">number: ${driver.driver_number}</span>
-                    <span>position: ${driver.position_current}</span>
-                    <span>points: ${driver.points_current}</span>
-                </div>
-            `
-        });
-    } catch (error) {
-       console.log("error: ", error); 
     }
 }
 

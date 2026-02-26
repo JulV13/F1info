@@ -33,7 +33,7 @@
     <h2>Your source of Formula 1</h2>
 
     <div class="info-boxes">
-        <div class="info-box">
+        <div id="racesBox" class="info-box">
             Choose a season:
             <form id="seasonsForm">
                 <select id="seasonSelect">
@@ -45,7 +45,8 @@
             </form>
             <button onclick="getRacesInfo()">🏁</button>
         </div>
-        <div id="driverChampionshipBox" style="visibility: hidden"></div>
+        <div id="allRacesBox" style="visibility: hidden"></div>
+        <div id="chosenRaceInfoBox" style="visibility: hidden"></div>
     </div>    
 
     <footer>
