@@ -14,21 +14,27 @@ window.onload = headToHeadSelectLoad = async () => {
         const driversResponse = await fetch("https://api.openf1.org/v1/championship_drivers?session_key=9839");
         const driversData = await driversResponse.json();
         console.log(driversData);
+
         const driverResponse = await fetch("https://api.openf1.org/v1/drivers?session_key=9839");
         const driverData = await driverResponse.json();
 
         var headToHeadSelect1 = document.getElementById("headToHeadSelect1");
         var headToHeadSelect2 = document.getElementById("headToHeadSelect2");
 
+        let select1data = '', select2data = '';
         driversData.forEach(driver => {
             let driverName = driverData.find(d => d.driver_number === driver.driver_number)
-            headToHeadSelect1.innerHTML += `
-            <option value="${driver.driver_number}">${driverName.full_name}</option>
+            if(driverName !== undefined) {
+            select1data+=`
+                <option value="${driver.driver_number}">${driverName.full_name}</option>
             `;
-            headToHeadSelect2.innerHTML += `
-            <option value="${driver.driver_number}">${driverName.full_name}</option>
-            `;
+            select2data+=`
+                <option value="${driver.driver_number}">${driverName.full_name}</option>
+            `
+            } 
         });
+        headToHeadSelect1.innerHTML += select1data;
+        headToHeadSelect2.innerHTML += select2data;
     } catch (error) {
         console.log("error: ", error);
     }
@@ -49,13 +55,14 @@ const headToHead = async () => {
         headToHeadBox.innerHTML = '';
         headToHeadBox.style.visibility="visible";
         headToHeadData.forEach(driver => {
-            let driverName = driverData.find(d => d.driver_number === driver.driver_number)
+            let driverInfo = driverData.find(d => d.driver_number === driver.driver_number)
             headToHeadBox.innerHTML += `
-                <div class="headToHeadCard">
-                    <span>${driverName.full_name}</span>
-                    <span class="driverNumber">#${driver.driver_number}</span>
-                    <span>position: ${driver.position_current}</span>
-                    <span>points: ${driver.points_current}</span>
+                <div class="driverCard" style="background-color: #${driverInfo.team_colour}">
+                    <img src="${driverInfo.headshot_url}" class="driverImage" style="border: 4px solid #${driverInfo.team_colour}">
+                    <span>${driverInfo.first_name} ${driverInfo.last_name}</span>
+                    <span class="driverNumber">${driver.driver_number}</span>
+                    <span class="driverNumber">points: ${driver.points_current}</span>
+                    <span>${driverInfo.team_name}</span>
                 </div>
             `
         });

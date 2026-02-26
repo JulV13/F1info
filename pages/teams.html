@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1info</title>
     <link rel="icon" type="image/x-icon" href="/images/f1car.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <script src="sessions.js"></script>
+    <script src="../scripts/teams.js"></script>
 </head>
 <body>
     <div class="read-progress-bar" id="read-progress-bar"></div>
@@ -17,7 +17,7 @@
         <img src="/images/f1car.png">
         <div>
             <a href="index.html">Latest</a>
-        </div> 
+        </div>        
         <div>
             <a href="drivers.html">Drivers</a>
         </div>
@@ -36,20 +36,11 @@
     <h2>Your source of Formula 1</h2>
 
     <div class="info-boxes">
-        <div id="racesBox" class="info-box">
-            Choose a season:
-            <form id="seasonsForm">
-                <select id="seasonSelect">
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                </select>
-            </form>
-            <button onclick="getRacesInfo()">🏁</button>
+        <div class="info-box">
+            Constructor's Championship:
+            <button onclick="getConstructorsChampionshipInfo()">🏎️</button>
         </div>
-        <div id="allRacesBox" style="visibility: hidden"></div>
-        <div id="chosenRaceInfoBox" style="visibility: hidden"></div>
+        <div id="constructorsChampionshipBox" style="visibility: hidden"></div>
     </div>    
 
     <footer>

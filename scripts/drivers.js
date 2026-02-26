@@ -22,18 +22,23 @@ const getDriversChampionshipInfo = async () => {
         driverChampionshipBox.innerHTML = '';
         driverChampionshipBox.style.visibility="visible";
 
-        driverData.forEach(driver => {
-            const stats = driversChampionshipData.find(stat => stat.driver_number === driver.driver_number);
-            driverChampionshipBox.innerHTML +=`
-                <div class="driverCard" style="background-color: #${driver.team_colour}">
-                    <img src="${driver.headshot_url}" class="driverImage" style="border: 4px solid #${driver.team_colour}">
-                    <span>${driver.first_name} ${driver.last_name}</span>
-                    <span class="driverNumber">${driver.driver_number}</span>
-                    <span class="driverNumber">points:${stats ? stats.points_current : 0}</span>
-                    <span>${driver.team_name}</span>
-                </div>
-            `;    
+        driversChampionshipData.forEach(driver => {
+            let stats = driverData.find(stat => stat.driver_number === driver.driver_number);
+            if(stats){
+                let teamColor = stats.team_colour ? `#${stats.team_colour}` : '#FFFFFF';
+                let driverPhoto = stats.headshot_url ? stats.headshot_url : 'https://www.formula1.com/etc/designs/f1/images/driver-placeholder.png';
+                driverChampionshipBox.innerHTML +=`
+                    <div class="driverCard" style="background-color: ${teamColor}">
+                        <img src="${driverPhoto}" class="driverImage" style="border: 4px solid ${teamColor}">
+                        <span>${stats.full_name}</span>
+                        <span class="driverNumber">${driver.driver_number}</span>
+                        <span class="driverNumber">points:${driver.points_current}</span>
+                        <span>${stats.team_name}</span>
+                    </div>
+                `; 
+            }
         });
+
     } catch (error) {
         console.log("error: ", error);
         driverChampionshipBox.innerHTML = 'error occured: ' + error;
