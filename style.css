@@ -232,6 +232,13 @@ h2{
   background-color: rgb(46, 46, 46);
 }
 
+#raceBox{
+    width: 75%;
+    height: auto;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
 footer{
     display: flex;
     align-items: center;

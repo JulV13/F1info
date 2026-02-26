@@ -9,59 +9,6 @@ document.addEventListener("scroll", () => {
 
 });
 
-const getDriversChampionshipInfo = async () => {
-    try {
-        const driversResponse = await fetch("https://api.openf1.org/v1/drivers?session_key=9839");
-        const driverData = await driversResponse.json();
-        console.log(driverData);
-        const driversChampionshipResponse = await fetch("https://api.openf1.org/v1/championship_drivers?session_key=9839");
-        const driversChampionshipData = await driversChampionshipResponse.json();
-        console.log(driversChampionshipData );
-
-        var driverChampionshipBox = document.getElementById("driverChampionshipBox");
-        driverChampionshipBox.innerHTML = '';
-        driverChampionshipBox.style.visibility="visible";
-
-        driverData.forEach(driver => {
-            const stats = driversChampionshipData.find(stat => stat.driver_number === driver.driver_number);
-            driverChampionshipBox.innerHTML +=`
-                <div class="driverCard" style="background-color: #${driver.team_colour}">
-                    <img src="${driver.headshot_url}" class="driverImage" style="border: 4px solid #${driver.team_colour}">
-                    <span>${driver.first_name} ${driver.last_name}</span>
-                    <span class="driverNumber">${driver.driver_number}</span>
-                    <span class="driverNumber">points:${stats ? stats.points_current : 0}</span>
-                    <span>${driver.team_name}</span>
-                </div>
-            `;    
-        });
-    } catch (error) {
-        console.log("error: ", error);
-        driverChampionshipBox.innerHTML = 'error occured: ' + error;
-    }
-}
-
-const getConstructorsChampionshipInfo = async () => {
-    try {
-        const constructorChampionshipResponse = await fetch("https://api.openf1.org/v1/championship_teams?session_key=9839");
-        const constructorChampionshipData = await constructorChampionshipResponse.json();
-        console.log(constructorChampionshipData);
-        var constructorsChampionshipBox = document.getElementById("constructorsChampionshipBox");
-        constructorsChampionshipBox.innerHTML = '';
-        constructorsChampionshipBox.style.visibility="visible";
-        constructorChampionshipData.forEach(team => {
-            constructorsChampionshipBox.innerHTML +=`
-                <div class="teamCard">
-                    <span>${team.team_name}</span>
-                    <span class="teamPosition">${team.position_current}</span>
-                    <span>points: ${team.points_current}</span>
-                </div>
-            `;    
-        });
-    } catch (error) {
-        console.log("error: ", error);
-    }
-}
-
 window.onload = headToHeadSelectLoad = async () => {
     try {
         const driversResponse = await fetch("https://api.openf1.org/v1/championship_drivers?session_key=9839");
@@ -92,7 +39,6 @@ const getLatestMeetingInfo = async () => {
         console.log(meetingData); 
 
         var latestMeetingBox = document.getElementById("latestMeetingBox");
-        latestMeetingBox.innerHTML = '';
 
         let weatherDirection = '';
         if (weatherData[558].wind_direction >=0 && weatherData[558].wind_direction <=89) weatherDirection='North-East';
@@ -113,8 +59,8 @@ const getLatestMeetingInfo = async () => {
             <span class="weatherData">🌧️ rainfall: ${weatherData[558].rainfall}</span>
             <span class="weatherData">🧭 wind direction: ${weatherDirection} (${weatherData[558].wind_direction})</span>
             <span class="weatherData">💨 wind speed: ${weatherData[558].wind_speed}</span>
-            <button onclick="getLatestResults()">ℹ️</button>
         `
+        document.getElementById("latestInfoButton").disabled = true;
     } catch (error) {
         console.log("error: ", error);
     }
@@ -187,6 +133,7 @@ const getLatestResults = async () => {
         </table>
         `;
         latestMeetingBox.innerHTML += latestResultsTable;
+        document.getElementById("latestResultsButton").disabled = true;
     } catch (error) {
         console.log("error: ", error);
     }  

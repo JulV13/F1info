@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <script src="script.js"></script>
+    <script src="teams.js"></script>
 </head>
 <body>
     <div class="read-progress-bar" id="read-progress-bar"></div>
@@ -33,22 +33,11 @@
     <h2>Your source of Formula 1</h2>
 
     <div class="info-boxes">
-        <div id="latestMeetingBox" class="info-box">
-            Latest session info:
-            <button id="latestInfoButton" onclick="getLatestMeetingInfo()">🏁</button>
-            Latest session results:
-            <button id="latestResultsButton" onclick="getLatestResults()">ℹ️</button>
-        </div>
-
         <div class="info-box">
-            Head to Head:
-            <form id="headToHeadForm">
-                <select id="headToHeadSelect1"></select>
-                <select id="headToHeadSelect2"></select>
-            </form>
-            <button onclick="headToHead()">🆚</button>
+            Constructor's Championship:
+            <button onclick="getConstructorsChampionshipInfo()">🏎️</button>
         </div>
-        <div id="headToHeadBox" style="visibility: hidden"></div>
+        <div id="constructorsChampionshipBox" style="visibility: hidden"></div>
     </div>    
 
     <footer>
