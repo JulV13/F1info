@@ -46,18 +46,19 @@ const raceResults = async (session_key) => {
         const driversChampionshipData = await driversChampionshipResponse.json();
 
         const chosenRaceInfoBox = document.getElementById("chosenRaceInfoBox");
+        chosenRaceInfoBox.innerHTML = '';
         chosenRaceInfoBox.style.visibility = "visible";
         let chosenRaceResultsTable = `
         <table>
             <thead>
             <tr>
                 <td>POS.</td>
-                <td>POINTS START</td>
-                <td>POINTS CURRENT</td>
-                <td>WDC # START</td>
-                <td>WDC # CURRENT</td>
-                <td>#</td>
                 <td>DRIVER</td>
+                <td>#</td>
+                <td>POINTS BEFORE</td>
+                <td>POINTS AFTER</td>
+                <td>WDC BEFORE</td>
+                <td>WDC AFTER</td>
                 <td>LAPS</td>
                 <td>DNF</td>
                 <td>DSQ</td>
@@ -73,12 +74,12 @@ const raceResults = async (session_key) => {
             chosenRaceResultsTable+=`
                 <tr>
                     <td>${driver.position ?? "-"}</td>
+                    <td>${fullName}</td>
+                    <td>${driver.driver_number}</td>
                     <td>${championshipInfo.points_start}</td>
                     <td>${championshipInfo.points_current}</td>
-                    <td>${championshipInfo.position_start}</td>
+                    <td>${championshipInfo.position_start ?? "-"}</td>
                     <td>${championshipInfo.position_current}</td>
-                    <td>${driver.driver_number}</td>
-                    <td>${fullName}</td>
                     <td>${driver.number_of_laps}</td>
                     <td>${driver.dnf === false ? "❌" : "✅"}</td>
                     <td>${driver.dsq === false ? "❌" : "✅"}</td>
