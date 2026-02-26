@@ -177,10 +177,6 @@ h2{
     font-style: italic;  
 }
 
-.headToHeadBox{
-    
-}
-
 #headToHeadSelect1, #headToHeadSelect2{
     width: 100px;
     height: 50px;
@@ -222,14 +218,18 @@ h2{
     height: auto;
     border: 2px solid black;
     border-collapse: collapse;
-    background-color: white;
-    color: black;
+    background-color: rgb(31, 31, 31);
+    color: white;
     margin: 0 auto;
 }
 
 #latestMeetingBox tr, td{
     font-size: 25px;
     border: 2px solid black; 
+}
+
+#latestMeetingBox tr:nth-child(even) {
+  background-color: rgb(46, 46, 46);
 }
 
 footer{

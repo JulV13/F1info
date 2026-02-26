@@ -157,7 +157,7 @@ const getLatestResults = async () => {
             <thead>
             <tr>
                 <td>POS.</td>
-                <td>NUMBER</td>
+                <td>#</td>
                 <td>DRIVER</td>
                 <td>LAPS</td>
                 <td>DNF</td>
