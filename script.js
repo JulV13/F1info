@@ -82,6 +82,43 @@ window.onload = headToHeadSelectLoad = async () => {
     }
 }
 
+const getLatestMeetingInfo = async () => {
+    try {
+        const weatherResponse = await fetch("https://api.openf1.org/v1/weather?session_key=latest");
+        const weatherData = await weatherResponse.json();
+        console.log(weatherData); 
+        const meetingResponse = await fetch("https://api.openf1.org/v1/meetings?meeting_key=latest");
+        const meetingData = await meetingResponse.json();
+        console.log(meetingData); 
+
+        var latestMeetingBox = document.getElementById("latestMeetingBox");
+        weatherData.innerHTML = '';
+
+        let weatherDirection = '';
+        if (weatherData[558].wind_direction >=0 && weatherData[558].wind_direction <=89) weatherDirection='North-East';
+        if (weatherData[558].wind_direction >=90 && weatherData[558].wind_direction <=189) weatherDirection='South-East';
+        if (weatherData[558].wind_direction >=190 && weatherData[558].wind_direction <=269) weatherDirection='South-West';
+        if (weatherData[558].wind_direction >=270 && weatherData[558].wind_direction <=359) weatherDirection='North-West';
+
+        latestMeetingBox.innerHTML += `
+            <img src="${meetingData[0].circuit_image}">
+            <span>${meetingData[0].circuit_short_name}</span>
+            <img src="${meetingData[0].country_flag}">
+            <span>${meetingData[0].country_name}</span>
+            <span>session type: ${meetingData[0].meeting_official_name}</span>
+            <span class="weatherData">🌡️ air: ${weatherData[558].air_temperature}&deg</span>
+            <span class="weatherData">🌡️ track: ${weatherData[558].track_temperature}&deg</span>
+            <span class="weatherData">💧 humidity: ${weatherData[558].humidity}</span>
+            <span class="weatherData">⚠️ pressure: ${weatherData[558].pressure}</span>
+            <span class="weatherData">🌧️ rainfall: ${weatherData[558].rainfall}</span>
+            <span class="weatherData">🧭 wind direction: ${weatherDirection} (${weatherData[558].wind_direction})</span>
+            <span class="weatherData">💨 wind speed: ${weatherData[558].wind_speed}</span>
+        `
+    } catch (error) {
+        console.log("error: ", error);
+    }
+}
+
 const headToHead = async () => {
     try {
         let driver1 = document.getElementById("headToHeadSelect1").value;
