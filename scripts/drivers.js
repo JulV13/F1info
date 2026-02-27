@@ -50,7 +50,7 @@ const getDriversChampionshipInfo = async () => {
                         <img src="${driverPhoto}" class="driverImage" style="border: 4px solid ${teamColor}">
                         <span class="driverName">${stats.full_name} <span class="driverNumber">${driver.driver_number}</span></span>
                         <div style="background-color: black;display: flex;justify-content:center;align-items:center;font-size: 50px">${placeText}</div>
-                        <span class="driverPoints">pts. ${driver.points_current} <span style="color: black">${pointsLeft}</span></span>
+                        <span class="driverPoints">pts. ${driver.points_current} <span style="color: #521a1b">${pointsLeft}</span></span>
                         <span class="driverTeam">${stats.team_name}</span>
                     </div>
                 `; 

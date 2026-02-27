@@ -42,9 +42,9 @@ const getConstructorsChampionshipInfo = async () => {
             let teamColor = driver.team_colour ? `#${driver.team_colour}` : '#FFFFFF';
             constructorsChampionshipBox.innerHTML +=`
                 <div class="teamCard" style="background-color: ${teamColor}">
-                    <span>${team.team_name}</span>
+                    <span class="teamName">${team.team_name}</span>
                     <div style="width: 100%;background-color: black;display: flex;justify-content:center;align-items:center;font-size: 50px">${placeText}</div>
-                    <span>pts. ${team.points_current} <span style="color: black">${pointsLeft}</span></span>
+                    <span class="teamPoints">pts. ${team.points_current} <span style="color: #521a1b">${pointsLeft}</span></span>
                 </div>
             `;    
         });

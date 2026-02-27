@@ -178,12 +178,19 @@ h2{
 
 .driverName{
     font-size: 40px;
+    text-shadow: 2px 2px 1px black;
 }
 .driverPoints{
     font-size: 40px;
+    text-shadow: 2px 2px 1px black;
 }
 .driverTeam{
     font-size: 25px;
+}
+.driverNumber{
+    font-size: 50px;
+    font-style: italic;
+    text-shadow: 2px 2px 1px black;
 }
 
 .teamCard{
@@ -237,14 +244,17 @@ h2{
     border-radius: 10px;  
 }
 
-.driverNumber{
-    font-size: 50px;
-    font-style: italic;
-}
-
 .teamPosition{
     font-size: 50px;
     font-style: italic;  
+}
+.teamName{
+    font-size: 40px;
+    text-shadow: 2px 2px 1px black;
+}
+.teamPoints{
+    font-size: 40px;
+    text-shadow: 2px 2px 1px black;
 }
 
 #headToHeadBox{
