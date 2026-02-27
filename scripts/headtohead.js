@@ -63,10 +63,9 @@ const headToHead = async () => {
             headToHeadBox.innerHTML += `
                 <div class="driverCard" style="background-color: #${driverInfo.team_colour}">
                     <img src="${driverInfo.headshot_url}" class="driverImage" style="border: 4px solid #${driverInfo.team_colour}">
-                    <span>${driverInfo.first_name} ${driverInfo.last_name}</span>
-                    <span class="driverNumber">${driver.driver_number}</span>
-                    <span class="driverNumber">points: ${driver.points_current}</span>
-                    <span>${driverInfo.team_name}</span>
+                    <span class="driverName">${driverInfo.full_name} <span class="driverNumber">${driver.driver_number}</span></span>
+                    <span class="driverPoints">pts. ${driver.points_current}</span>
+                    <span class="driverTeam">${driverInfo.team_name}</span>
                 </div>
             `
         });
