@@ -21,8 +21,19 @@ const getDriversChampionshipInfo = async () => {
         var driverChampionshipBox = document.getElementById("driverChampionshipBox");
         driverChampionshipBox.innerHTML = '';
         driverChampionshipBox.style.visibility="visible";
-
+        let driverCounter = 0;
+        let placeText = '';
         driversChampionshipData.forEach(driver => {
+            driverCounter++;
+            if (driverCounter==1){
+                placeText = '🏆';
+            } else if (driverCounter==2){
+                placeText = '🥈';
+            } else if(driverCounter==3){
+                placeText = '🥉';
+            } else {
+                placeText = ''+driverCounter;
+            }
             let stats = driverData.find(stat => stat.driver_number === driver.driver_number);
             if(stats){
                 let teamColor = stats.team_colour ? `#${stats.team_colour}` : '#FFFFFF';
@@ -30,10 +41,10 @@ const getDriversChampionshipInfo = async () => {
                 driverChampionshipBox.innerHTML +=`
                     <div class="driverCard" style="background-color: ${teamColor}">
                         <img src="${driverPhoto}" class="driverImage" style="border: 4px solid ${teamColor}">
-                        <span>${stats.full_name}</span>
-                        <span class="driverNumber">${driver.driver_number}</span>
-                        <span class="driverNumber">points: ${driver.points_current}</span>
-                        <span>${stats.team_name}</span>
+                        <span class="driverName">${stats.full_name} [${driver.driver_number}]</span>
+                        <div style="background-color: black;display: flex;justify-content:center;align-items:center;font-size: 50px">${placeText}</div>
+                        <span class="driverPoints">pts. ${driver.points_current}</span>
+                        <span class="driverTeam">${stats.team_name}</span>
                     </div>
                 `; 
             }

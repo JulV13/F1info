@@ -49,6 +49,7 @@ const raceResults = async (session_key) => {
         chosenRaceInfoBox.innerHTML = '';
         chosenRaceInfoBox.style.visibility = "visible";
         let chosenRaceResultsTable = `
+        <div style="overflow-x:auto">
         <table>
             <thead>
             <tr>
@@ -90,6 +91,7 @@ const raceResults = async (session_key) => {
         chosenRaceResultsTable+=`
             </tbody>
         </table>
+        </div>
         `;
         chosenRaceInfoBox.innerHTML += chosenRaceResultsTable;
     } catch (error) {

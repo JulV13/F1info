@@ -140,7 +140,7 @@ h2{
 }
 
 .driverCard{
-    width: 50%;
+    width: 35%;
     min-height: 100px;
     height: auto;
     text-align: center;
@@ -151,16 +151,16 @@ h2{
     display: flex;
     flex-direction: column;
     font-size: 35px;
-    border: 4px solid rgb(35, 35, 35);
+    border: 4px solid rgb(255, 255, 255);
     border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
 }
-
 .driverCard:hover{
     transition: 0.3s;
     font-size: 50px;
-    width: 75%;
+    width: 50%;
 }
-
 .driverCard:hover img{
     transition: 0.3s;
     width: 200px;
@@ -176,9 +176,19 @@ h2{
   }
 }
 
+.driverName{
+    font-size: 40px;
+}
+.driverPoints{
+    font-size: 40px;
+}
+.driverTeam{
+    font-size: 25px;
+}
+
 .teamCard{
-    width: 30%;
-    min-height: 100px;
+    width: 35%;
+    min-height: 200px;
     height: auto;
     text-align: center;
     margin: 0 auto;
@@ -187,8 +197,29 @@ h2{
     color: white;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: 35px;
-    border: 2px solid black; 
+    border: 4px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.teamCard:hover{
+    transition: 0.2s;
+    width: 50%;
+    height: 300px;
+    font-size: 45px;
+}
+
+@media screen and (max-width: 800px) {
+  .teamCard {
+    width: auto;
+  }
+  .teamCard:hover{
+    width: auto;
+  }
 }
 
 .teamColorBox{
@@ -277,11 +308,14 @@ h2{
     background-color: rgb(31, 31, 31);
     color: white;
     margin: 0 auto;
+    table-layout: fixed; 
+    text-align: center
 }
 
 #latestMeetingBox tr, td{
     font-size: 25px;
     border: 2px solid black; 
+    word-break: break-word;
 }
 
 #latestMeetingBox tr:nth-child(even) {
@@ -328,11 +362,14 @@ h2{
     background-color: rgb(31, 31, 31);
     color: white;
     margin: 0 auto;
+    table-layout: fixed; 
+    text-align: center
 }
 
 #chosenRaceInfoBox tr, td{
     font-size: 25px;
     border: 2px solid black; 
+    word-break: break-word;
 }
 
 #chosenRaceInfoBox tr:nth-child(even) {

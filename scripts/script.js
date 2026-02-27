@@ -55,6 +55,7 @@ const getLatestResults = async () => {
         const driversData = await driversResponse.json();
         var latestMeetingBox = document.getElementById("latestMeetingBox");
         let latestResultsTable = `
+        <div style="overflow-x:auto">
         <table>
             <thead>
             <tr>
@@ -87,6 +88,7 @@ const getLatestResults = async () => {
         latestResultsTable+=`
             </tbody>
         </table>
+        </div>
         `;
         latestMeetingBox.innerHTML += latestResultsTable;
         document.getElementById("latestResultsButton").disabled = true;
