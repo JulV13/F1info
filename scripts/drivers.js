@@ -22,17 +22,24 @@ const getDriversChampionshipInfo = async () => {
         driverChampionshipBox.innerHTML = '';
         driverChampionshipBox.style.visibility="visible";
         let driverCounter = 0;
+        let firstPoints = 0;
+        let pointsLeft = 0;
         let placeText = '';
         driversChampionshipData.forEach(driver => {
             driverCounter++;
             if (driverCounter==1){
                 placeText = '🏆';
+                firstPoints = driver.points_current;
+                pointsLeft='';
             } else if (driverCounter==2){
                 placeText = '🥈';
+                pointsLeft = `[-${firstPoints-driver.points_current}]`;
             } else if(driverCounter==3){
                 placeText = '🥉';
+                pointsLeft = `[-${firstPoints-driver.points_current}]`;
             } else {
                 placeText = ''+driverCounter;
+                pointsLeft = `[-${firstPoints-driver.points_current}]`;
             }
             let stats = driverData.find(stat => stat.driver_number === driver.driver_number);
             if(stats){
@@ -41,9 +48,9 @@ const getDriversChampionshipInfo = async () => {
                 driverChampionshipBox.innerHTML +=`
                     <div class="driverCard" style="background-color: ${teamColor}">
                         <img src="${driverPhoto}" class="driverImage" style="border: 4px solid ${teamColor}">
-                        <span class="driverName">${stats.full_name} [${driver.driver_number}]</span>
+                        <span class="driverName">${stats.full_name} <span class="driverNumber">${driver.driver_number}</span></span>
                         <div style="background-color: black;display: flex;justify-content:center;align-items:center;font-size: 50px">${placeText}</div>
-                        <span class="driverPoints">pts. ${driver.points_current}</span>
+                        <span class="driverPoints">pts. ${driver.points_current} <span style="color: black">${pointsLeft}</span></span>
                         <span class="driverTeam">${stats.team_name}</span>
                     </div>
                 `; 

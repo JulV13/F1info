@@ -21,15 +21,22 @@ const getConstructorsChampionshipInfo = async () => {
         constructorsChampionshipBox.innerHTML = '';
         constructorsChampionshipBox.style.visibility="visible";
         let placeText = '';
+        let firstPoints = 0;
+        let pointsLeft = 0;
         constructorChampionshipData.forEach(team => {
             if (team.position_current==1){
                 placeText = '🏆';
+                firstPoints = team.points_current;
+                pointsLeft = '';
             } else if (team.position_current==2){
                 placeText = '🥈';
+                pointsLeft = `[-${firstPoints-team.points_current}]`;
             } else if(team.position_current==3){
                 placeText = '🥉';
+                pointsLeft = `[-${firstPoints-team.points_current}]`;
             } else {
                 placeText = ''+team.position_current;
+                pointsLeft = `[-${firstPoints-team.points_current}]`;
             }
             let driver = driverData.find(d => d.team_name === team.team_name)
             let teamColor = driver.team_colour ? `#${driver.team_colour}` : '#FFFFFF';
@@ -37,7 +44,7 @@ const getConstructorsChampionshipInfo = async () => {
                 <div class="teamCard" style="background-color: ${teamColor}">
                     <span>${team.team_name}</span>
                     <div style="width: 100%;background-color: black;display: flex;justify-content:center;align-items:center;font-size: 50px">${placeText}</div>
-                    <span>points: ${team.points_current}</span>
+                    <span>pts. ${team.points_current} <span style="color: black">${pointsLeft}</span></span>
                 </div>
             `;    
         });
