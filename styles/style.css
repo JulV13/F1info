@@ -7,8 +7,7 @@ body{
     margin-top: 5px;
     color: white;
     text-align: center;
-    margin: 0 auto;
-    font-size: 40px;
+    font-size: 30px;
     background-color: rgb(114, 13, 13);
     display: flex;
     justify-content: center;
@@ -16,7 +15,12 @@ body{
     font-weight: bold;
 }
 .menu div{
-    width: 20%;
+    height: auto;
+    min-width: 15%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 .menu div:hover{
     background-color:rgb(43, 21, 21);
@@ -25,6 +29,24 @@ body{
 .menu img{
     width: 57px;
     height: 57px;
+    margin: 0 auto;
+}
+.menu span{
+    margin: 0 auto;
+    padding-top: 5px;
+}
+.menu a{
+    padding-top: 5px;
+}
+
+@media screen and (max-width: 800px) {
+  .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+  }
 }
 
 .read-progress-bar{
