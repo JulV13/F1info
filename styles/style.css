@@ -39,6 +39,11 @@ body{
     padding-top: 5px;
 }
 
+.boxTitle{
+    width: auto;
+    height: auto;
+}
+
 @media screen and (max-width: 800px) {
   .menu {
     display: flex;
@@ -194,7 +199,7 @@ h2{
 }
 
 .teamCard{
-    width: 35%;
+    width: 50%;
     min-height: 200px;
     height: auto;
     text-align: center;
@@ -215,9 +220,8 @@ h2{
 
 .teamCard:hover{
     transition: 0.2s;
-    width: 50%;
-    height: 300px;
-    font-size: 45px;
+    width: 75%;
+    font-size: 50px;
 }
 
 @media screen and (max-width: 800px) {
@@ -296,10 +300,10 @@ h2{
 
 @media screen and (max-width: 800px) {
   .teamCard {
-    width: 25%;
+    width: 75%;
   }
   .teamCard:hover{
-    width: 25%;
+    width: 75%;
   }
 }
 
