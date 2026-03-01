@@ -324,15 +324,16 @@ h2{
 }
 
 #latestMeetingBox table{
-    width: 75%;
+    width: 90%;
     height: auto;
-    border: 2px solid black;
+    border: 3px solid rgb(255, 255, 255);
     border-collapse: collapse;
     background-color: rgb(31, 31, 31);
     color: white;
     margin: 0 auto;
     table-layout: fixed; 
-    text-align: center
+    text-align: center;
+    margin-top: 10px;
 }
 
 #latestMeetingBox tr, td{
@@ -343,6 +344,11 @@ h2{
 
 #latestMeetingBox tr:nth-child(even) {
   background-color: rgb(46, 46, 46);
+}
+
+.latestSessionInfo{
+    display: flex;
+    flex-direction: row;
 }
 
 #seasonsBox{

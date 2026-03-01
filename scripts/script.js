@@ -27,35 +27,36 @@ const getLatestMeetingInfo = async () => {
         if (weatherData[558].wind_direction >=270 && weatherData[558].wind_direction <=359) weatherDirection='North-West';
 
         latestMeetingBox.innerHTML += `
+            <br>
             <span>${meetingData[0].meeting_official_name}</span>
-            <img src="${meetingData[0].circuit_image}">
-            <span>${meetingData[0].circuit_short_name}</span>
-            <img src="${meetingData[0].country_flag}">
-            <span>${meetingData[0].country_name}</span>
-            <span class="weatherData">🌡️ air: ${weatherData[558].air_temperature}&deg</span>
-            <span class="weatherData">🌡️ track: ${weatherData[558].track_temperature}&deg</span>
-            <span class="weatherData">💧 humidity: ${weatherData[558].humidity}</span>
-            <span class="weatherData">⚠️ pressure: ${weatherData[558].pressure}</span>
-            <span class="weatherData">🌧️ rainfall: ${weatherData[558].rainfall}</span>
-            <span class="weatherData">🧭 wind direction: ${weatherDirection} (${weatherData[558].wind_direction})</span>
-            <span class="weatherData">💨 wind speed: ${weatherData[558].wind_speed}</span>
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin: 0 auto; gap: 20px;">
+                <img src="${meetingData[0].country_flag}">                
+                <img src="${meetingData[0].circuit_image}">
+                <span>${meetingData[0].country_name}</span>
+                <span>${meetingData[0].circuit_short_name}</span>   
+            </div>
+            <div style="display: flex; flex-direction: column; margin-top: 20px;">
+                <span class="weatherData">🌡️ air: ${weatherData[558].air_temperature}&deg</span>
+                <span class="weatherData">🌡️ track: ${weatherData[558].track_temperature}&deg</span>
+                <span class="weatherData">💧 humidity: ${weatherData[558].humidity}</span>
+                <span class="weatherData">⚠️ pressure: ${weatherData[558].pressure}</span>
+                <span class="weatherData">🌧️ rainfall: ${weatherData[558].rainfall}</span>
+                <span class="weatherData">🧭 wind: ${weatherDirection} (${weatherData[558].wind_direction})</span>
+                <span class="weatherData">💨 wind speed: ${weatherData[558].wind_speed}</span>
+            </div>
         `
-        document.getElementById("latestInfoButton").disabled = true;
-    } catch (error) {
-        console.log("error: ", error);
-    }
-}
 
-const getLatestResults = async () => {
-      try {
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+        await sleep(1000);
+
         const latestResultsResponse = await fetch("https://api.openf1.org/v1/session_result?session_key=latest");
         const latestResultsData = await latestResultsResponse.json();
         console.log(latestResultsData);
         const driversResponse = await fetch("https://api.openf1.org/v1/drivers?session_key=latest");
         const driversData = await driversResponse.json();
-        var latestMeetingBox = document.getElementById("latestMeetingBox");
+
         let latestResultsTable = `
-        <div style="overflow-x:auto">
+        <div style="overflow-x:auto; margin-top: 20px;">
         <table>
             <thead>
             <tr>
@@ -63,9 +64,7 @@ const getLatestResults = async () => {
                 <td>#</td>
                 <td>DRIVER</td>
                 <td>LAPS</td>
-                <td>DNF</td>
-                <td>DSQ</td>
-                <td>DNS</td>
+                <td>DNF/DSQ/DNS</td>
             </tr>
             </thead>
             <tbody>
@@ -79,9 +78,7 @@ const getLatestResults = async () => {
                     <td>${driver.driver_number}</td>
                     <td>${fullName}</td>
                     <td>${driver.number_of_laps}</td>
-                    <td>${driver.dnf === false ? "❌" : "✅"}</td>
-                    <td>${driver.dsq === false ? "❌" : "✅"}</td>
-                    <td>${driver.dns === false ? "❌" : "✅"}</td>
+                    <td>${driver.dnf === false ? "❌" : "✅"}/${driver.dsq === false ? "❌" : "✅"}/${driver.dns === false ? "❌" : "✅"}</td>
                 </tr>
             `;
         });
@@ -91,8 +88,7 @@ const getLatestResults = async () => {
         </div>
         `;
         latestMeetingBox.innerHTML += latestResultsTable;
-        document.getElementById("latestResultsButton").disabled = true;
     } catch (error) {
         console.log("error: ", error);
-    }  
+    }
 }
