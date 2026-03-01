@@ -37,9 +37,10 @@ const getSessionsInfo = async () => {
                     <span>${session.session_name} - ${session.circuit_short_name} - ${session.country_name}</span>   
                     <img src=${meetingInfo.country_flag} alt="country flag"></img>
                     <img src=${meetingInfo.circuit_image} alt="circuit image"></img>
-                    <button id="sessionResultsButton" onclick="sessionResults(${session.session_key})">results</button>
-                    <div id="results_${session.session_key}" class="chosenSessionInfoBox"></div>
+                    <button id="sessionResultsButton" onclick="sessionResults(${session.session_key})">Results</button>
+                    <button id="hideResultsButton" onclick="hideResults(${session.session_key})">Hide</button>
                 </div>
+                <div id="results_${session.session_key}" class="chosenSessionInfoBox"></div>
             `
         });
     } catch (error) {
@@ -49,18 +50,24 @@ const getSessionsInfo = async () => {
 
 const sessionResults = async (session_key) => {
       try {
+
         const sessionResultsResponse = await fetch(`https://api.openf1.org/v1/session_result?session_key=${session_key}`);
         const sessionResultsData = await sessionResultsResponse.json();
         console.log(sessionResultsData);
+
         const driversResponse = await fetch(`https://api.openf1.org/v1/drivers?session_key=${session_key}`);
         const driversData = await driversResponse.json();
+
         const driversChampionshipResponse = await fetch(`https://api.openf1.org/v1/championship_drivers?session_key=${session_key}`);
         const driversChampionshipData = await driversChampionshipResponse.json();
 
         const chosenSessionInfoBox = document.getElementById(`results_${session_key}`);
         chosenSessionInfoBox.innerHTML = '';
-
         const sessionResultsButton = document.getElementById("sessionResultsButton");
+        sessionResultsButton.disabled = true;
+        const hideResultsButton = document.getElementById("hideResultsButton");
+        hideResultsButton.disabled = false;
+
         const target = document.getElementById(`results_${session_key}`);
         sessionResultsButton.addEventListener("click", () => {
             target.scrollIntoView({behavior: 'smooth'});
@@ -85,14 +92,16 @@ const sessionResults = async (session_key) => {
             <tbody>
         `;
         sessionResultsData.forEach(driver => { 
+
             let driverInfo = driversData.find(d => d.driver_number == driver.driver_number);
             let championshipInfo = driversChampionshipData.find(c => c.driver_number == driver.driver_number);
-            let fullName = driverInfo.full_name ?? "-";
-            let firstName = (driverInfo.first_name)[0] ?? "";
+            let lastName = `${driverInfo.last_name}`;
+            let lastNameSliced = lastName.slice(0,3).toUpperCase();
+
             chosenSessionResultsTable+=`
                 <tr>
                     <td>${driver.position ?? "-"}</td>
-                    <td>${firstName}.${driverInfo.last_name}</td>
+                    <td>${lastNameSliced}</td>
                     <td>${driver.driver_number}</td>
                     <td>${championshipInfo.points_start}</td>
                     <td>${championshipInfo.points_current}</td>
@@ -112,4 +121,16 @@ const sessionResults = async (session_key) => {
     } catch (error) {
         console.log("error: ", error);
     } 
+}
+
+const hideResults = async (session_key) => {
+    try {
+        const sessionResults = document.getElementById(`results_${session_key}`);
+        sessionResults.innerHTML = '';
+        const resultsButton = document.getElementById("sessionResultsButton");
+        resultsButton.disabled = false;
+
+    } catch (error) {
+        console.log("error: ", error);
+    }
 }

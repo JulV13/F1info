@@ -364,13 +364,14 @@ h2{
     background-color: rgb(35, 35, 35);
     border-radius: 5px;
     color: white;
-    font-size: 25px;
+    font-size: 15px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    padding-top: 10px;
+    padding: 15px;
+    margin-top: 15px;
 }
 
 .sessionBox span {
@@ -379,14 +380,18 @@ h2{
 
 .sessionBox button {
     height: 75px;
-    width: 100px;
+    width: 150px;
     font-size: 25px;
+}
+
+.sessionBox button:hover {
+    width: 150px;
 }
 
 .sessionBox img{
     width: 175px;
     height: 100px;
-    margin-top: 5px;
+    margin: 20px;
 }
 
 #seasonsForm{
@@ -422,7 +427,7 @@ h2{
 .sessionResults{
     width: 90%;
     height: auto;
-    border: 2px solid black;
+    border: 3px solid rgb(255, 255, 255);
     border-collapse: collapse;
     background-color: rgb(31, 31, 31);
     color: white;
@@ -430,10 +435,11 @@ h2{
     table-layout: fixed; 
     text-align: center;
     margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .sessionResults thead {
-    word-break: normal;
+    word-break: break-word;
 }
 
 .sessionResults tbody {
