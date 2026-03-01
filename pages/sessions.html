@@ -37,7 +37,7 @@
     <h2>Your source of Formula 1</h2>
 
     <div class="info-boxes">
-        <div id="racesBox" class="info-box">
+        <div id="seasonsBox" class="info-box">
             Choose a season:
             <form id="seasonsForm">
                 <select id="seasonSelect">
@@ -46,11 +46,16 @@
                     <option value="2025">2025</option>
                     <option value="2026">2026</option>
                 </select>
+                <select id="sessionTypeSelect">
+                    <option value="All">All</option>
+                    <option value="Practice">Practice</option>
+                    <option value="Qualifying">Qualifying</option>
+                    <option value="Race">Race</option>
+                </select>
             </form>
-            <button onclick="getRacesInfo()">🏁</button>
+            <button onclick="getSessionsInfo()">🏁</button>
         </div>
-        <div id="allRacesBox" style="visibility: hidden"></div>
-        <div id="chosenRaceInfoBox" style="visibility: hidden"></div>
+        <div id="allSessionsBox" style="visibility: hidden"></div>
     </div>    
 
     <footer>

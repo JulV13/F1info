@@ -9,24 +9,36 @@ document.addEventListener("scroll", () => {
 
 });
 
-const getRacesInfo = async () => {
+const getSessionsInfo = async () => {
     try {
         const d = new Date();
         let year = d.getFullYear();
         var seasonSelect = document.getElementById("seasonSelect").value ?? year;
-        const seasonResponse = await fetch(`https://api.openf1.org/v1/sessions?year=${seasonSelect}`);
+        var sessionTypeSelect = document.getElementById("sessionTypeSelect").value;
+        var seasonResponse = '';
+        if (sessionTypeSelect=="All") {
+            seasonResponse = await fetch(`https://api.openf1.org/v1/sessions?year=${seasonSelect}`);
+        } else {
+            seasonResponse = await fetch(`https://api.openf1.org/v1/sessions?year=${seasonSelect}&session_type=${sessionTypeSelect}`);
+        }
         const seasonData = await seasonResponse.json();
         console.log(seasonData);
-        const allRacesBox = document.getElementById("allRacesBox");
-        allRacesBox.innerHTML='';
-        allRacesBox.style.visibility = "visible";
-        seasonData.forEach(race => { 
-            allRacesBox.innerHTML+=`
-                <div id="raceBox">
-                    <span>${race.circuit_short_name}</span>
-                    <span>${race.country_name}</span>
-                    <span>${race.session_name}</span>
-                    <button onclick="raceResults(${race.session_key})">results</button>
+        const allSessionsBox = document.getElementById("allSessionsBox");
+        allSessionsBox.innerHTML='';
+        allSessionsBox.style.visibility = "visible";
+
+        meetingResponse = await fetch(`https://api.openf1.org/v1/meetings?year=${seasonSelect}`);
+        const meetingData = await meetingResponse.json();
+
+        seasonData.forEach(session => {
+            let meetingInfo = meetingData.find(m => m.meeting_key == session.meeting_key);
+            allSessionsBox.innerHTML+=`
+                <div class="sessionBox">
+                    <span>${session.session_name} - ${session.circuit_short_name} - ${session.country_name}</span>   
+                    <img src=${meetingInfo.country_flag} alt="country flag"></img>
+                    <img src=${meetingInfo.circuit_image} alt="circuit image"></img>
+                    <button id="sessionResultsButton" onclick="sessionResults(${session.session_key})">results</button>
+                    <div id="results_${session.session_key}" class="chosenSessionInfoBox"></div>
                 </div>
             `
         });
@@ -35,7 +47,7 @@ const getRacesInfo = async () => {
     }
 }
 
-const raceResults = async (session_key) => {
+const sessionResults = async (session_key) => {
       try {
         const sessionResultsResponse = await fetch(`https://api.openf1.org/v1/session_result?session_key=${session_key}`);
         const sessionResultsData = await sessionResultsResponse.json();
@@ -45,25 +57,29 @@ const raceResults = async (session_key) => {
         const driversChampionshipResponse = await fetch(`https://api.openf1.org/v1/championship_drivers?session_key=${session_key}`);
         const driversChampionshipData = await driversChampionshipResponse.json();
 
-        const chosenRaceInfoBox = document.getElementById("chosenRaceInfoBox");
-        chosenRaceInfoBox.innerHTML = '';
-        chosenRaceInfoBox.style.visibility = "visible";
-        let chosenRaceResultsTable = `
+        const chosenSessionInfoBox = document.getElementById(`results_${session_key}`);
+        chosenSessionInfoBox.innerHTML = '';
+
+        const sessionResultsButton = document.getElementById("sessionResultsButton");
+        const target = document.getElementById(`results_${session_key}`);
+        sessionResultsButton.addEventListener("click", () => {
+            target.scrollIntoView({behavior: 'smooth'});
+        });
+
+        let chosenSessionResultsTable = `
         <div style="overflow-x:auto">
-        <table>
+        <table class="sessionResults">
             <thead>
             <tr>
                 <td>POS.</td>
                 <td>DRIVER</td>
                 <td>#</td>
-                <td>POINTS BEFORE</td>
-                <td>POINTS AFTER</td>
-                <td>WDC BEFORE</td>
-                <td>WDC AFTER</td>
+                <td>PTS [<]</td>
+                <td>PTS [>]</td>
+                <td>WDC [<]</td>
+                <td>WDC [>]</td>
                 <td>LAPS</td>
-                <td>DNF</td>
-                <td>DSQ</td>
-                <td>DNS</td>
+                <td>DNF/DSQ/DNS</td>
             </tr>
             </thead>
             <tbody>
@@ -72,28 +88,27 @@ const raceResults = async (session_key) => {
             let driverInfo = driversData.find(d => d.driver_number == driver.driver_number);
             let championshipInfo = driversChampionshipData.find(c => c.driver_number == driver.driver_number);
             let fullName = driverInfo.full_name ?? "-";
-            chosenRaceResultsTable+=`
+            let firstName = (driverInfo.first_name)[0] ?? "";
+            chosenSessionResultsTable+=`
                 <tr>
                     <td>${driver.position ?? "-"}</td>
-                    <td>${fullName}</td>
+                    <td>${firstName}.${driverInfo.last_name}</td>
                     <td>${driver.driver_number}</td>
                     <td>${championshipInfo.points_start}</td>
                     <td>${championshipInfo.points_current}</td>
                     <td>${championshipInfo.position_start ?? "-"}</td>
                     <td>${championshipInfo.position_current}</td>
                     <td>${driver.number_of_laps}</td>
-                    <td>${driver.dnf === false ? "❌" : "✅"}</td>
-                    <td>${driver.dsq === false ? "❌" : "✅"}</td>
-                    <td>${driver.dns === false ? "❌" : "✅"}</td>
+                    <td>${driver.dnf === false ? "❌" : "✅"}/${driver.dsq === false ? "❌" : "✅"}/${driver.dns === false ? "❌" : "✅"}</td>
                 </tr>
             `;
         });
-        chosenRaceResultsTable+=`
+        chosenSessionResultsTable+=`
             </tbody>
         </table>
         </div>
         `;
-        chosenRaceInfoBox.innerHTML += chosenRaceResultsTable;
+        chosenSessionInfoBox.innerHTML += chosenSessionResultsTable;
     } catch (error) {
         console.log("error: ", error);
     } 
