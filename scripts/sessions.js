@@ -31,10 +31,11 @@ const getSessionsInfo = async () => {
         const meetingData = await meetingResponse.json();
 
         seasonData.forEach(session => {
+            let sessionDate = `${session.date_start}`.slice(0,10);
             let meetingInfo = meetingData.find(m => m.meeting_key == session.meeting_key);
             allSessionsBox.innerHTML+=`
                 <div class="sessionBox">
-                    <span>${session.session_name} - ${session.circuit_short_name} - ${session.country_name}</span>   
+                    <span>${session.session_name} - ${session.circuit_short_name} - ${sessionDate}</span> 
                     <img src=${meetingInfo.country_flag} alt="country flag"></img>
                     <img src=${meetingInfo.circuit_image} alt="circuit image"></img>
                     <button id="sessionResultsButton" onclick="sessionResults(${session.session_key})">Results</button>
