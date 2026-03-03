@@ -446,6 +446,7 @@ h2{
 
 .sessionResults thead {
     word-break: break-word;
+    font-weight: bold;
 }
 
 .sessionResults tbody {
