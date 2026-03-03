@@ -129,7 +129,7 @@ const sessionResults = async (session_key) => {
                         <tr>
                             <td>${driver.position ?? "-"}</td>
                             <td>${lastNameSliced} #${driver.driver_number}</td>
-                            <td>${championshipInfo.points_start} -> ${championshipInfo.points_current}</td>
+                            <td>${championshipInfo.points_start} -> ${championshipInfo.points_current} [+${championshipInfo.points_current - championshipInfo.points_start}]</td>
                             <td>${championshipInfo.position_start ?? "0"} -> ${championshipInfo.position_current}</td>
                             <td>${driver.number_of_laps}</td>
                             <td>${raceTime}</td>
