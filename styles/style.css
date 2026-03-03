@@ -1,6 +1,7 @@
 body{
-    background-color: rgb(37, 37, 37);
+    background-color: rgb(215, 228, 255);
     font-family: "Outfit", sans-serif;
+    margin: 0;
 }
 
 .menu{
@@ -8,7 +9,7 @@ body{
     color: white;
     text-align: center;
     font-size: 30px;
-    background-color: rgb(114, 13, 13);
+    background-color: rgb(32, 88, 255);
     display: flex;
     justify-content: center;
     align-content: center;
@@ -23,7 +24,7 @@ body{
     align-content: center;
 }
 .menu div:hover{
-    background-color:rgb(43, 21, 21);
+    background-color:rgb(10, 29, 84);
     transition: 0.2s;
 } 
 .menu img{
@@ -59,7 +60,7 @@ body{
     position: fixed;
     width: 10%;
     height: 5px;
-    background-color: white;
+    background-color: rgb(32, 88, 255);
     top: 0;
     left: 0;
 }
@@ -70,19 +71,19 @@ a{
 }
 
 h1{
-    color: rgb(78, 78, 78);
+    color: rgb(32, 88, 255);
     font-weight: bold;
     text-align: center;
 }
 
 h2{
-    color: rgb(113, 113, 113);
+    color: rgb(124, 157, 255);
     font-weight: bold;
     text-align: center; 
 }
 
 .info-boxes{
-    background-color: rgb(51, 25, 25);
+    background-color: rgb(32, 88, 255);
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -90,7 +91,7 @@ h2{
     width: 150px;
     height: 100px;
     background-color: rgb(255, 255, 255);
-    border: 4px solid rgb(255, 84, 84);
+    border: 4px solid rgb(32, 88, 255);
     border-radius: 5px;
     color: black;
     display: flex;
@@ -104,16 +105,16 @@ h2{
 }
 .info-boxes button:hover{
     transition: 0.2s;
-    background-color: rgb(255, 84, 84);
+    background-color: rgb(32, 88, 255);
     border: 4px solid white;
-    width: 200px;
+    width: 175px;
 }
 
 .info-boxes button:active{
     transition: 0.2s;
-    background-color: rgb(86, 29, 29);
+    background-color: rgb(32, 88, 255);
     border: 4px solid white;
-    width: 200px;
+    width: 175px;
 }
 
 .info-box{
@@ -121,11 +122,11 @@ h2{
     min-height: 200px;
     margin: 0 auto;
     text-align: center;
-    background-color:rgb(79, 29, 29);
+    background-color:rgb(18, 45, 126);
     margin-bottom: 10px;
     color: white;
     font-size: 50px;
-    border: 4px solid rgb(30, 30, 30);
+    border: 4px solid rgb(10, 27, 78);
     border-radius: 5px;
 }
 
@@ -466,7 +467,7 @@ footer{
     text-align: center;
     margin: 0 auto;
     color: white;
-    background-color: rgb(79, 29, 29);
+    background-color: rgb(32, 88, 255);
     font-weight: bold;
     margin-top: 20px;
 }
