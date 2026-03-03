@@ -58,6 +58,7 @@ const sessionResults = async (session_key) => {
 
         const sessionResponse = await fetch(`https://api.openf1.org/v1/sessions?session_key=${session_key}`);
         const sessionData = await sessionResponse.json();
+        console.log(sessionData);
 
         const driversResponse = await fetch(`https://api.openf1.org/v1/drivers?session_key=${session_key}`);
         const driversData = await driversResponse.json();
@@ -67,9 +68,6 @@ const sessionResults = async (session_key) => {
 
         const driversChampionshipResponse = await fetch(`https://api.openf1.org/v1/championship_drivers?session_key=${session_key}`);
         const driversChampionshipData = await driversChampionshipResponse.json();
-
-        const startingGridResponse = await fetch(`https://api.openf1.org/v1/starting_grid?session_key=${session_key}`);
-        const startingGridData = await startingGridResponse.json();
 
         const chosenSessionInfoBox = document.getElementById(`results_${session_key}`);
         chosenSessionInfoBox.innerHTML = '';
@@ -123,7 +121,7 @@ const sessionResults = async (session_key) => {
                     }
 
                     let raceTime = `${raceHours}:${raceMinutes}:${raceSeconds}`;
-                    if (raceTime==`0:0:00`) {
+                    if (raceTime==`0:0:00` || raceTime==`00:0:00`) {
                         raceTime='-';
                     }
 
@@ -195,18 +193,18 @@ const sessionResults = async (session_key) => {
                         q3Seconds = `0${q3Seconds}`;
                     }
 
-                    let q1fullTime = `${q1Minutes}:${q1Seconds}:${q1miliSeconds}`;
-                    if (q1fullTime == '0:00:0') {
+                    let q1fullTime = `${q1Minutes}:${q1Seconds}.${q1miliSeconds}`;
+                    if (q1fullTime == '00:00.0' || q1fullTime == '0:00.0') {
                         q1fullTime = '-'
                     }
 
-                    let q2fullTime = `${q2Minutes}:${q2Seconds}:${q2miliSeconds}`;
-                    if (q2fullTime == '0:00:0') {
+                    let q2fullTime = `${q2Minutes}:${q2Seconds}.${q2miliSeconds}`;
+                    if (q2fullTime == '00:00.0' || q2fullTime == '0:00.0') {
                         q2fullTime = '-'
                     }
                     
-                    let q3fullTime = `${q3Minutes}:${q3Seconds}:${q3miliSeconds}`;
-                    if (q3fullTime == '0:00:0') {
+                    let q3fullTime = `${q3Minutes}:${q3Seconds}.${q3miliSeconds}`;
+                    if (q3fullTime == '00:00.0' || q3fullTime == '0:00.0') {
                         q3fullTime = '-'
                     }
 
@@ -223,6 +221,64 @@ const sessionResults = async (session_key) => {
                     `;                
             });
         }
+
+        if(`${sessionData[0].session_type}`=="Practice"){
+
+            chosenSessionResultsTable = `
+            <div style="overflow-x:auto">
+            <table class="sessionResults">
+                <thead>
+                <tr>
+                    <td>POS.</td>
+                    <td>DRIVER</td>
+                    <td>LAPS</td>
+                    <td>TIME</td>
+                    <td>DNF/DSQ/DNS</td>
+                </tr>
+                </thead>
+                <tbody>
+            `;        
+            
+            sessionResultsData.forEach(driver => { 
+
+                    let driverInfo = driversData.find(d => d.driver_number == driver.driver_number);
+                    let sessionResultsInfo = sessionResultsData.find(ss => ss.driver_number == driver.driver_number)
+                    let lastName = `${driverInfo.last_name}`;
+                    let lastNameSliced = lastName.slice(0,3).toUpperCase();
+
+                    let practiceMinutes = Math.trunc((driver.duration / 60));
+                    let practiceSeconds = Math.trunc((driver.duration) - (practiceMinutes*60));
+                    let practicemiliSeconds = Math.trunc((driver.duration % 1) * 1000);
+
+                    if (practiceMinutes / 10 < 1){
+                        practiceMinutes = `0${practiceMinutes}`;
+                    }
+
+                    if (practiceSeconds / 10 < 1){
+                        practiceSeconds = `0${practiceSeconds}`;
+                    }
+
+                    if (practicemiliSeconds / 10 < 1){
+                        practicemiliSeconds = `0${practicemiliSeconds}`;
+                    }
+
+                    let practiceTime = `${practiceMinutes}:${practiceSeconds}.${practicemiliSeconds}`;
+                    if (practiceTime==`00:00.00` || practiceTime==`0:00.00`) {
+                        practiceTime='-';
+                    }
+
+                    chosenSessionResultsTable+=`
+                        <tr>
+                            <td>${driver.position ?? "-"}</td>
+                            <td>${lastNameSliced} #${driver.driver_number}</td>
+                            <td>${sessionResultsInfo.number_of_laps ?? "-"}</td>
+                            <td>${practiceTime}</td>
+                            <td>${sessionResultsInfo.dnf === false ? "❌" : "✅"}/${sessionResultsInfo.dsq === false ? "❌" : "✅"}/${sessionResultsInfo.dns === false ? "❌" : "✅"}</td>
+                        </tr>
+                    `;                
+            });
+        }
+
         chosenSessionResultsTable+=`
             </tbody>
         </table>
