@@ -75,11 +75,6 @@ const sessionResults = async (session_key) => {
         sessionResultsButton.disabled = true;
         const hideResultsButton = document.getElementById("hideResultsButton");
         hideResultsButton.disabled = false;
-
-        // const target = document.getElementById(`results_${session_key}`);
-        // sessionResultsButton.addEventListener("click", () => {
-        //     target.scrollIntoView({behavior: 'smooth'});
-        // });
     
         let chosenSessionResultsTable = ``;
 

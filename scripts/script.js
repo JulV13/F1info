@@ -21,31 +21,37 @@ const getLatestMeetingInfo = async () => {
         var latestMeetingBox = document.getElementById("latestMeetingBox");
 
         let weatherDirection = '';
-        if (weatherData[558].wind_direction >=0 && weatherData[558].wind_direction <=89) weatherDirection='North-East';
-        if (weatherData[558].wind_direction >=90 && weatherData[558].wind_direction <=189) weatherDirection='South-East';
-        if (weatherData[558].wind_direction >=190 && weatherData[558].wind_direction <=269) weatherDirection='South-West';
-        if (weatherData[558].wind_direction >=270 && weatherData[558].wind_direction <=359) weatherDirection='North-West';
+        if (weatherData[558].wind_direction >=0 && weatherData[558].wind_direction <=89) weatherDirection='NE';
+        if (weatherData[558].wind_direction >=90 && weatherData[558].wind_direction <=189) weatherDirection='SE';
+        if (weatherData[558].wind_direction >=190 && weatherData[558].wind_direction <=269) weatherDirection='SW';
+        if (weatherData[558].wind_direction >=270 && weatherData[558].wind_direction <=359) weatherDirection='NW';
 
         latestMeetingBox.innerHTML += `
             <br>
-            <span>${meetingData[0].meeting_official_name}</span>
-            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin: 0 auto; gap: 20px;">
-                <img src="${meetingData[0].country_flag}">                
+            <hr>
+            <span class="latestMeetingTitle">${meetingData[0].meeting_official_name}</span>
+            <hr>
+            <div class="latestMeetingDataCountry">
+                <img src="${meetingData[0].country_flag}">       
+                <span>${meetingData[0].country_name}</span>            
+            </div>
+            <hr>
+            <div class="latestMeetingDataCircuit">
                 <img src="${meetingData[0].circuit_image}">
-                <span>${meetingData[0].country_name}</span>
-                <span>${meetingData[0].circuit_short_name}</span>   
+                <span>${meetingData[0].circuit_short_name}</span>
             </div>
-            <div style="display: flex; flex-direction: column; margin-top: 20px;">
-                <span class="weatherData">🌡️ air: ${weatherData[558].air_temperature}&deg</span>
-                <span class="weatherData">🌡️ track: ${weatherData[558].track_temperature}&deg</span>
-                <span class="weatherData">💧 humidity: ${weatherData[558].humidity}</span>
-                <span class="weatherData">⚠️ pressure: ${weatherData[558].pressure}</span>
-                <span class="weatherData">🌧️ rainfall: ${weatherData[558].rainfall}</span>
-                <span class="weatherData">🧭 wind: ${weatherDirection} (${weatherData[558].wind_direction})</span>
-                <span class="weatherData">💨 wind speed: ${weatherData[558].wind_speed}</span>
+            <hr>
+            <div class="lastestSessionWeatherBox">
+                <span class="weatherData">🌡️ ${weatherData[558].air_temperature}&deg</span>
+                <span class="weatherData">🛣️ ${weatherData[558].track_temperature}&deg</span>
+                <span class="weatherData">💧 ${weatherData[558].humidity}%</span>
+                <span class="weatherData">⚠️ ${weatherData[558].pressure} Pa</span>
+                <span class="weatherData">🌧️ ${weatherData[558].rainfall}</span>
+                <span class="weatherData">💨 ${weatherData[558].wind_speed} km/h - ${weatherDirection}</span>
             </div>
+            <hr>
         `
-
+        
         const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
         await sleep(1000);
 
