@@ -336,6 +336,7 @@ h2{
     table-layout: fixed; 
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 #latestMeetingBox tr, td{

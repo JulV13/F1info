@@ -20,6 +20,8 @@ const getLatestMeetingInfo = async () => {
 
         var latestMeetingBox = document.getElementById("latestMeetingBox");
 
+        latestMeetingBox.innerHTML = '';
+
         let weatherDirection = '';
         if (weatherData[558].wind_direction >=0 && weatherData[558].wind_direction <=89) weatherDirection='NE';
         if (weatherData[558].wind_direction >=90 && weatherData[558].wind_direction <=189) weatherDirection='SE';
