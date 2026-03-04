@@ -115,6 +115,11 @@ const sessionResults = async (session_key) => {
                     let raceHours = Math.trunc(driver.duration / 3600);
                     let raceMinutes = Math.trunc((driver.duration / 60) - (raceHours*60));
                     let raceSeconds = Math.trunc((driver.duration) - (raceHours*3600) - (raceMinutes*60));
+                    let raceMiliseconds = Math.trunc((driver.duration % 1) * 1000);
+
+                    if(raceMiliseconds / 100 < 1) {
+                        raceMiliseconds = `0${raceMiliseconds}`;
+                    }
 
                     if (raceSeconds / 10 < 1){
                         raceSeconds = `0${raceSeconds}`;
@@ -124,22 +129,36 @@ const sessionResults = async (session_key) => {
                         raceHours = `0${raceHours}`;
                     }
 
-                    let raceTime = `${raceHours}:${raceMinutes}:${raceSeconds}`;
-                    if (raceTime==`0:0:00` || raceTime==`00:0:00`) {
+                    let raceTime = `${raceHours}:${raceMinutes}:${raceSeconds}.${raceMiliseconds}`;
+                    if (raceTime==`0:0:00` || raceTime==`00:0:00` || raceTime==`00:0:00.00`) {
                         raceTime='-';
                     }
 
-                    chosenSessionResultsTable+=`
-                        <tr>
-                            <td>${driver.position ?? "-"}</td>
-                            <td>${lastNameSliced} #${driver.driver_number}</td>
-                            <td>${championshipInfo.points_start} -> ${championshipInfo.points_current} [+${championshipInfo.points_current - championshipInfo.points_start}]</td>
-                            <td>${championshipInfo.position_start ?? "0"} -> ${championshipInfo.position_current}</td>
-                            <td>${driver.number_of_laps}</td>
-                            <td>${raceTime}</td>
-                            <td>${driver.dnf === false ? "❌" : "✅"}/${driver.dsq === false ? "❌" : "✅"}/${driver.dns === false ? "❌" : "✅"}</td>
-                        </tr>
-                    `;
+                    if (driver.dsq === false) {
+                        chosenSessionResultsTable+=`
+                            <tr>
+                                <td>${driver.position ?? "-"}</td>
+                                <td>${lastNameSliced} #${driver.driver_number}</td>
+                                <td>${championshipInfo.points_start} -> ${championshipInfo.points_current} [+${championshipInfo.points_current - championshipInfo.points_start}]</td>
+                                <td>${championshipInfo.position_start ?? "0"} -> ${championshipInfo.position_current}</td>
+                                <td>${driver.number_of_laps ?? "-"}</td>
+                                <td>${raceTime}</td>
+                                <td>${driver.dnf === false ? "❌" : "✅"}/${driver.dsq === false ? "❌" : "✅"}/${driver.dns === false ? "❌" : "✅"}</td>
+                            </tr>
+                        `;
+                    } else {
+                        chosenSessionResultsTable+=`
+                            <tr>
+                                <td>${driver.position ?? "-"}</td>
+                                <td>${lastNameSliced} #${driver.driver_number}</td>
+                                <td>${championshipInfo.points_start} -> ${championshipInfo.points_start} [+${championshipInfo.points_start - championshipInfo.points_start}]</td>
+                                <td>${championshipInfo.position_start ?? "0"} -> ${championshipInfo.position_current}</td>
+                                <td>${driver.number_of_laps}</td>
+                                <td>${raceTime}</td>
+                                <td>${driver.dnf === false ? "❌" : "✅"}/${driver.dsq === false ? "❌" : "✅"}/${driver.dns === false ? "❌" : "✅"}</td>
+                            </tr>
+                        `;                       
+                    }
             });
         }
 
@@ -197,18 +216,30 @@ const sessionResults = async (session_key) => {
                         q3Seconds = `0${q3Seconds}`;
                     }
 
+                    if(q1miliSeconds / 100 < 1) {
+                        q1miliSeconds = `0${q1miliSeconds}`;
+                    }
+
+                    if(q2miliSeconds / 100 < 1) {
+                        q2miliSeconds = `0${q2miliSeconds}`;
+                    }
+
+                    if(q3miliSeconds / 100 < 1) {
+                        q3miliSeconds = `0${q3miliSeconds}`;
+                    }
+
                     let q1fullTime = `${q1Minutes}:${q1Seconds}.${q1miliSeconds}`;
-                    if (q1fullTime == '00:00.0' || q1fullTime == '0:00.0') {
+                    if (q1fullTime == '00:00.0' || q1fullTime == '0:00.0' || q1fullTime == '0:00.00') {
                         q1fullTime = '-'
                     }
 
                     let q2fullTime = `${q2Minutes}:${q2Seconds}.${q2miliSeconds}`;
-                    if (q2fullTime == '00:00.0' || q2fullTime == '0:00.0') {
+                    if (q2fullTime == '00:00.0' || q2fullTime == '0:00.0' || q2fullTime == '0:00.00') {
                         q2fullTime = '-'
                     }
                     
                     let q3fullTime = `${q3Minutes}:${q3Seconds}.${q3miliSeconds}`;
-                    if (q3fullTime == '00:00.0' || q3fullTime == '0:00.0') {
+                    if (q3fullTime == '00:00.0' || q3fullTime == '0:00.0' || q3fullTime == '0:00.00') {
                         q3fullTime = '-'
                     }
 
