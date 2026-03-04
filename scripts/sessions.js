@@ -36,9 +36,9 @@ const getSessionsInfo = async () => {
             allSessionsBox.innerHTML+=`
                 <div class="sessionBox">
                     <div class="sessionTypeInfo">
-                        <span>${session.session_name}</span>|
-                        <span>${session.country_name}</span>|
-                        <span>${session.circuit_short_name}</span>|
+                        <span>${session.session_name}</span>
+                        <span>${session.country_name}</span>
+                        <span>${session.circuit_short_name}</span>
                         <span>${sessionDate}</span>
                     </div>
                     <div class="sessionImages">
