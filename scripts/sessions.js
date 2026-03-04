@@ -36,8 +36,8 @@ const getSessionsInfo = async () => {
             allSessionsBox.innerHTML+=`
                 <div class="sessionBox">
                     <span>${session.session_name} - ${session.circuit_short_name} - ${sessionDate}</span> 
-                    <img src=${meetingInfo.country_flag} alt="country flag"></img>
-                    <img src=${meetingInfo.circuit_image} alt="circuit image"></img>
+                    <img class="sessionCountryImage" src=${meetingInfo.country_flag} alt="country flag"></img>
+                    <img class="sessionCircuitImage" src=${meetingInfo.circuit_image} alt=""></img>
                     <button id="sessionResultsButton" onclick="sessionResults(${session.session_key})">Results</button>
                     <button id="hideResultsButton" onclick="hideResults(${session.session_key})">Hide</button>
                 </div>

@@ -4,6 +4,15 @@ body{
     margin: 0;
 }
 
+h1{
+    margin-bottom: 1px;
+}
+
+h2{
+    color: rgb(100, 134, 234);
+    margin-top: 1px;
+}
+
 .menu{
     margin-top: 5px;
     color: white;
@@ -89,7 +98,7 @@ h2{
 }
 .info-boxes button{
     width: 200px;
-    height: 100px;
+    height: 75px;
     background-color:rgba(255, 255, 255, 0);
     border: 4px solid rgb(255, 255, 255);
     border-radius: 25px;
@@ -109,6 +118,7 @@ h2{
     background-color: rgb(255, 255, 255);
     border: 4px solid rgb(32, 88, 255);
     color: rgb(32, 88, 255);
+    cursor:pointer;
 }
 
 .info-boxes button:active{
@@ -126,9 +136,14 @@ h2{
     background-color:rgb(18, 45, 126);
     margin-bottom: 10px;
     color: white;
-    font-size: 50px;
+    font-size: 30px;
+    padding: 10px;
     border: 4px solid rgb(10, 27, 78);
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .driverChampionshipBox{
@@ -147,7 +162,7 @@ h2{
 }
 
 .driverCard{
-    width: 35%;
+    width: 50%;
     min-height: 100px;
     height: auto;
     text-align: center;
@@ -162,16 +177,6 @@ h2{
     border-radius: 5px;
     font-weight: bold;
     margin-top: 20px;
-}
-.driverCard:hover{
-    transition: 0.3s;
-    font-size: 50px;
-    width: 50%;
-}
-.driverCard:hover img{
-    transition: 0.3s;
-    width: 200px;
-    height: 200px;
 }
 
 @media screen and (max-width: 800px) {
@@ -331,7 +336,7 @@ h2{
     height: auto;
     border: 3px solid rgb(255, 255, 255);
     border-collapse: collapse;
-    background-color: rgb(31, 31, 31);
+    background-color: rgb(11, 10, 78);
     color: white;
     margin: 0 auto;
     table-layout: fixed; 
@@ -346,7 +351,7 @@ h2{
 }
 
 #latestMeetingBox tr:nth-child(even) {
-  background-color: rgb(46, 46, 46);
+  background-color: rgb(31, 29, 98);
 }
 
 .latestSessionInfo{
@@ -395,14 +400,23 @@ h2{
 
 .sessionBox button:hover {
     width: 150px;
+    cursor:pointer;
 }
 
 .sessionBox button:active {
     width: 125px;
 }
 
-.sessionBox img{
+.sessionCountryImage{
     width: 175px;
+    height: 100px;
+    margin: 20px;
+    border: 4px solid white;
+    border-radius: 15px;
+}
+
+.sessionCircuitImage{
+    width: 150px;
     height: 100px;
     margin: 20px;
 }
@@ -444,7 +458,7 @@ h2{
     height: auto;
     border: 3px solid rgb(255, 255, 255);
     border-collapse: collapse;
-    background-color: rgb(31, 31, 31);
+    background-color: rgb(11, 10, 78);
     color: white;
     margin: 0 auto;
     table-layout: fixed; 
@@ -464,7 +478,7 @@ h2{
 }
 
 .sessionResults tr:nth-child(even) {
-  background-color: rgb(46, 46, 46);
+  background-color: rgb(31, 29, 98);
 }
 
 footer{
