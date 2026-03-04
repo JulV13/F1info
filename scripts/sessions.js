@@ -35,11 +35,20 @@ const getSessionsInfo = async () => {
             let meetingInfo = meetingData.find(m => m.meeting_key == session.meeting_key);
             allSessionsBox.innerHTML+=`
                 <div class="sessionBox">
-                    <span>${session.session_name} - ${session.circuit_short_name} - ${sessionDate}</span> 
-                    <img class="sessionCountryImage" src=${meetingInfo.country_flag} alt="country flag"></img>
-                    <img class="sessionCircuitImage" src=${meetingInfo.circuit_image} alt=""></img>
-                    <button id="sessionResultsButton" onclick="sessionResults(${session.session_key})">Results</button>
-                    <button id="hideResultsButton" onclick="hideResults(${session.session_key})">Hide</button>
+                    <div class="sessionTypeInfo">
+                        <span>${session.session_name}</span>|
+                        <span>${session.country_name}</span>|
+                        <span>${session.circuit_short_name}</span>|
+                        <span>${sessionDate}</span>
+                    </div>
+                    <div class="sessionImages">
+                        <img class="sessionCountryImage" src=${meetingInfo.country_flag} alt="country flag"></img>
+                        <img class="sessionCircuitImage" src=${meetingInfo.circuit_image} alt=""></img>
+                    </div>
+                    <div class="sessionButtons">
+                        <button id="sessionResultsButton" onclick="sessionResults(${session.session_key})">results</button>
+                        <button id="hideResultsButton" onclick="hideResults(${session.session_key})">hide</button>
+                    </div>
                 </div>
                 <div id="results_${session.session_key}" class="chosenSessionInfoBox"></div>
             `

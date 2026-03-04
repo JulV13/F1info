@@ -206,7 +206,7 @@ h2{
 }
 
 .teamCard{
-    width: 50%;
+    width: 75%;
     min-height: 200px;
     height: auto;
     text-align: center;
@@ -223,12 +223,6 @@ h2{
     border-radius: 5px;
     font-weight: bold;
     margin-top: 20px;
-}
-
-.teamCard:hover{
-    transition: 0.2s;
-    width: 75%;
-    font-size: 50px;
 }
 
 @media screen and (max-width: 800px) {
@@ -448,18 +442,49 @@ hr{
     background-color: rgb(18, 45, 126);
     border-radius: 5px;
     color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     margin: 0 auto;
     padding: 15px;
     margin-top: 15px;
 }
 
-.sessionBox span {
-    font-size: 20px;
+@media screen and (max-width: 1000px) {
+  .sessionBox {
+        display: flex; 
+        flex-direction: column; 
+  }
+}
+
+.sessionTypeInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
     font-weight: bold;
+    text-align: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.sessionImages{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.sessionButtons{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    gap: 10px;
 }
 
 .sessionBox button {
