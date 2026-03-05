@@ -51,6 +51,7 @@ const getSessionsInfo = async () => {
                     </div>
                 </div>
                 <div id="results_${session.session_key}" class="chosenSessionInfoBox"></div>
+                <div id="chart_${session.session_key}" class="chosenSessionInfoBox"></div>
             `
         });
     } catch (error) {
@@ -78,16 +79,60 @@ const sessionResults = async (session_key) => {
         const driversChampionshipResponse = await fetch(`https://api.openf1.org/v1/championship_drivers?session_key=${session_key}`);
         const driversChampionshipData = await driversChampionshipResponse.json();
 
+        const driverLapsResponse = await fetch(`https://api.openf1.org/v1/laps?session_key=${session_key}`);
+        const driverLapsData = await driverLapsResponse.json();
+        console.log(driverLapsData);
+
+        const driverPosResponse = await fetch(`https://api.openf1.org/v1/position?session_key=${session_key}`);
+        const driverPosData = await driverPosResponse.json();
+        console.log(driverPosData);
+
         const chosenSessionInfoBox = document.getElementById(`results_${session_key}`);
         chosenSessionInfoBox.innerHTML = '';
         const sessionResultsButton = document.getElementById("sessionResultsButton");
         sessionResultsButton.disabled = true;
         const hideResultsButton = document.getElementById("hideResultsButton");
         hideResultsButton.disabled = false;
+        const chosenSessionChart = document.getElementById(`chart_${session_key}`);
     
         let chosenSessionResultsTable = ``;
 
         if(`${sessionData[0].session_type}`=="Race") {
+
+            chosenSessionChart.innerHTML = ''
+            chosenSessionChart.innerHTML = `
+                <div id="raceChartDiv" class="raceChart" style="width:1000px;height:500px;"></div>
+            `;
+            
+            driverLapsData.forEach(entry => {
+                // przejsc po kazdym kierowcy i kazdym jego okrazeniu i dla niego wygenerować trace
+                // i tak dla każdego kierowcy
+                // polaczenie position i lap za pomocą daty
+                let posInfo = driverPosData.find(p => p.date == entry.date_start);
+
+                // dla kazdego kierowcy generowac trace: trace_{driver_number},
+                // gdzie x to okrazenia, a y to pozycja kierowcy
+                
+
+            });
+
+            /*
+            var trace1 = {
+                x: [1, 2, 3, 4],
+                y: [10, 15, 13, 17],
+                type: 'scatter'
+            };
+
+            var trace2 = {
+                x: [1, 2, 3, 4],
+                y: [16, 5, 11, 9],
+                type: 'scatter'
+            };
+
+            var data = [trace1, trace2];
+
+            Plotly.newPlot('raceChartDiv', data);
+            */
 
             chosenSessionResultsTable = `
             <div style="overflow-x:auto">
