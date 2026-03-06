@@ -108,8 +108,12 @@ const getLatestMeetingInfo = async () => {
                     practicemiliSeconds = `0${practicemiliSeconds}`;
                 }
 
+                if (practicemiliSeconds / 100 < 1){
+                    practicemiliSeconds = `0${practicemiliSeconds}`;
+                }
+
                 let practiceTime = `${practiceMinutes}:${practiceSeconds}.${practicemiliSeconds}`;
-                if (practiceTime==`00:00.00` || practiceTime==`0:00.00`) {
+                if (practiceTime==`00:00.00` || practiceTime==`0:00.00` || practiceTime==`00:00.000`) {
                     practiceTime='-';
                 }
                 
