@@ -78,6 +78,7 @@ const getLatestMeetingInfo = async () => {
                 <thead>
                 <tr>
                     <td>POS.</td>
+                    <td>PHOTO</td>
                     <td>DRIVER</td>
                     <td>LAPS</td>
                     <td>TIME</td>
@@ -120,6 +121,7 @@ const getLatestMeetingInfo = async () => {
                 latestResultsTable+=`
                     <tr>
                         <td>${driver.position ?? "-"}</td>
+                        <td><img src=${driverInfo.headshot_url}></td>
                         <td>${fullName} #${driver.driver_number}</td>
                         <td>${driver.number_of_laps}</td>
                         <td>${practiceTime ?? "-"}</td>
