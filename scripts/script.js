@@ -81,7 +81,7 @@ const getLatestMeetingInfo = async () => {
                     <td>PHOTO</td>
                     <td>DRIVER</td>
                     <td>LAPS</td>
-                    <td>TIME</td>
+                    <td>TIME</td>   
                     <td>DNF</td>
                     <td>DSQ</td>
                     <td>DNS</td>
@@ -140,6 +140,7 @@ const getLatestMeetingInfo = async () => {
                 <thead>
                 <tr>
                     <td>POS.</td>
+                    <td>PHOTO</td>
                     <td>DRIVER</td>
                     <td>LAPS</td>
                     <td>Q1</td>
@@ -212,6 +213,7 @@ const getLatestMeetingInfo = async () => {
                 latestResultsTable+=`
                     <tr>
                         <td>${driver.position ?? "-"}</td>
+                        <td><img src=${driverInfo.headshot_url}></td>
                         <td>${fullName} #${driver.driver_number}</td>
                         <td>${driver.number_of_laps}</td>
                         <td>${q1fullTime ?? "-"}</td>
@@ -230,6 +232,7 @@ const getLatestMeetingInfo = async () => {
                 <thead>
                 <tr>
                     <td>POS.</td>
+                    <td>PHOTO</td>
                     <td>DRIVER</td>
                     <td>LAPS</td>
                     <td>TIME</td>
@@ -267,6 +270,7 @@ const getLatestMeetingInfo = async () => {
                 latestResultsTable+=`
                     <tr>
                         <td>${driver.position ?? "-"}</td>
+                        <td><img src=${driverInfo.headshot_url}></td>
                         <td>${fullName} #${driver.driver_number}</td>
                         <td>${driver.number_of_laps}</td>
                         <td>${raceTime ?? "-"}</td>
