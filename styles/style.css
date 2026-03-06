@@ -319,12 +319,6 @@ h2{
     padding-bottom: 20px;
 }
 
-#latestMeetingBox img{
-    width: 125px;
-    height: 100px;
-    margin: 0 auto;
-}
-
 #latestMeetingBox table{
     width: 90%;
     height: auto;
@@ -375,6 +369,11 @@ hr{
     margin-bottom: 20px;
 }
 
+.latestMeetingDataCountry img{
+    width: 150px;
+    height: 100px;
+}
+
 @media screen and (max-width: 800px) {
   .latestMeetingDataCountry {
         display: flex; 
@@ -395,6 +394,11 @@ hr{
     gap: 20px;
     font-weight: bold;
     margin-bottom: 20px;
+}
+
+.latestMeetingDataCircuit img{
+    width: 150px;
+    height: 100px;
 }
 
 @media screen and (max-width: 800px) {
